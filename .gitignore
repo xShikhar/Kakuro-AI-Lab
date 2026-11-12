@@ -1,0 +1,15 @@
+# Generated dependencies, caches, and local runtime output.
+.venv/
+node_modules/
+frontend/dist/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+*.log
+.env
+.env.*
+!.env.example
+*.pem
+*.key

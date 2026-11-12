@@ -1,0 +1,43 @@
+{
+  "stream": {
+    "puzzle": "expert-1",
+    "events": 102,
+    "status": "solved",
+    "verification": {
+      "verified": 86,
+      "total": 86,
+      "failures": [],
+      "assumptions": 4,
+      "valid": true
+    }
+  },
+  "hints": "three levels, final verified digit reveal",
+  "diagnosis": {
+    "contradiction": true,
+    "shortest": true,
+    "explored": 1
+  },
+  "arena": {
+    "runs": 7,
+    "fastest": "degree"
+  },
+  "generation": {
+    "unique": true,
+    "difficulty": {
+      "score": 41.5,
+      "label": "Hard",
+      "technique_steps": 17,
+      "guess_levels": 0,
+      "thresholds": [
+        13.0,
+        20.5,
+        34.5,
+        47.5
+      ],
+      "calibrated": true
+    },
+    "wall_time_ms": 25.437
+  },
+  "frontend_http_status": 200,
+  "browser_visual_qa": "unverified: Computer Use stopped at Windows URL safety detection"
+}

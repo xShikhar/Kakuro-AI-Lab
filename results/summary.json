@@ -1,0 +1,1673 @@
+{
+  "n_paired_seeds": 200,
+  "sizes": [
+    5,
+    6
+  ],
+  "budget_seconds": 0.6,
+  "python": "3.11.9",
+  "platform": "Windows-10-10.0.26300-SP0",
+  "generation": [
+    {
+      "size": 5,
+      "mode": "repair",
+      "n": 200,
+      "success_rate": 0.97,
+      "mean_time_ms": 104.88446
+    },
+    {
+      "size": 5,
+      "mode": "random",
+      "n": 200,
+      "success_rate": 0.505,
+      "mean_time_ms": 217.712945
+    },
+    {
+      "size": 6,
+      "mode": "repair",
+      "n": 200,
+      "success_rate": 0.68,
+      "mean_time_ms": 283.98188
+    },
+    {
+      "size": 6,
+      "mode": "random",
+      "n": 200,
+      "success_rate": 0.05,
+      "mean_time_ms": 583.53021
+    }
+  ],
+  "calibration": {
+    "5": {
+      "n": 200,
+      "thresholds": [
+        13.0,
+        20.5,
+        34.5,
+        47.5
+      ],
+      "method": "empirical quintiles; ties stay in lower class",
+      "seeds_examined": 207
+    },
+    "6": {
+      "n": 200,
+      "thresholds": [
+        27.5,
+        44.5,
+        62.0,
+        84.0
+      ],
+      "method": "empirical quintiles; ties stay in lower class",
+      "seeds_examined": 302
+    }
+  },
+  "correlation": {
+    "rho": 0.7777443367772254,
+    "p_value": 2.870042460884861e-82,
+    "n": 400,
+    "censored": 0
+  },
+  "scatter": [
+    {
+      "score": 11.5,
+      "nodes": 41
+    },
+    {
+      "score": 65.0,
+      "nodes": 1494
+    },
+    {
+      "score": 66.0,
+      "nodes": 556
+    },
+    {
+      "score": 44.5,
+      "nodes": 106
+    },
+    {
+      "score": 14.0,
+      "nodes": 65
+    },
+    {
+      "score": 27.5,
+      "nodes": 24
+    },
+    {
+      "score": 46.5,
+      "nodes": 279
+    },
+    {
+      "score": 41.0,
+      "nodes": 285
+    },
+    {
+      "score": 37.0,
+      "nodes": 28
+    },
+    {
+      "score": 11.0,
+      "nodes": 26
+    },
+    {
+      "score": 21.5,
+      "nodes": 73
+    },
+    {
+      "score": 20.5,
+      "nodes": 45
+    },
+    {
+      "score": 41.0,
+      "nodes": 42
+    },
+    {
+      "score": 30.0,
+      "nodes": 72
+    },
+    {
+      "score": 39.0,
+      "nodes": 122
+    },
+    {
+      "score": 11.0,
+      "nodes": 52
+    },
+    {
+      "score": 39.0,
+      "nodes": 38
+    },
+    {
+      "score": 60.0,
+      "nodes": 517
+    },
+    {
+      "score": 42.0,
+      "nodes": 69
+    },
+    {
+      "score": 18.5,
+      "nodes": 14
+    },
+    {
+      "score": 38.0,
+      "nodes": 112
+    },
+    {
+      "score": 18.0,
+      "nodes": 58
+    },
+    {
+      "score": 16.0,
+      "nodes": 14
+    },
+    {
+      "score": 37.0,
+      "nodes": 169
+    },
+    {
+      "score": 11.0,
+      "nodes": 43
+    },
+    {
+      "score": 47.5,
+      "nodes": 125
+    },
+    {
+      "score": 38.0,
+      "nodes": 200
+    },
+    {
+      "score": 40.5,
+      "nodes": 50
+    },
+    {
+      "score": 15.0,
+      "nodes": 75
+    },
+    {
+      "score": 78.5,
+      "nodes": 500
+    },
+    {
+      "score": 11.0,
+      "nodes": 43
+    },
+    {
+      "score": 11.0,
+      "nodes": 35
+    },
+    {
+      "score": 22.5,
+      "nodes": 23
+    },
+    {
+      "score": 18.5,
+      "nodes": 41
+    },
+    {
+      "score": 48.0,
+      "nodes": 221
+    },
+    {
+      "score": 45.5,
+      "nodes": 100
+    },
+    {
+      "score": 36.5,
+      "nodes": 52
+    },
+    {
+      "score": 18.5,
+      "nodes": 41
+    },
+    {
+      "score": 10.5,
+      "nodes": 42
+    },
+    {
+      "score": 18.5,
+      "nodes": 14
+    },
+    {
+      "score": 16.0,
+      "nodes": 41
+    },
+    {
+      "score": 41.5,
+      "nodes": 327
+    },
+    {
+      "score": 21.5,
+      "nodes": 126
+    },
+    {
+      "score": 33.5,
+      "nodes": 173
+    },
+    {
+      "score": 32.0,
+      "nodes": 49
+    },
+    {
+      "score": 49.0,
+      "nodes": 89
+    },
+    {
+      "score": 11.0,
+      "nodes": 34
+    },
+    {
+      "score": 54.5,
+      "nodes": 70
+    },
+    {
+      "score": 30.0,
+      "nodes": 82
+    },
+    {
+      "score": 42.0,
+      "nodes": 248
+    },
+    {
+      "score": 19.0,
+      "nodes": 78
+    },
+    {
+      "score": 11.0,
+      "nodes": 8
+    },
+    {
+      "score": 48.0,
+      "nodes": 302
+    },
+    {
+      "score": 16.0,
+      "nodes": 57
+    },
+    {
+      "score": 52.0,
+      "nodes": 44
+    },
+    {
+      "score": 27.5,
+      "nodes": 209
+    },
+    {
+      "score": 16.0,
+      "nodes": 23
+    },
+    {
+      "score": 42.0,
+      "nodes": 41
+    },
+    {
+      "score": 62.0,
+      "nodes": 45
+    },
+    {
+      "score": 16.0,
+      "nodes": 93
+    },
+    {
+      "score": 64.5,
+      "nodes": 127
+    },
+    {
+      "score": 32.5,
+      "nodes": 105
+    },
+    {
+      "score": 18.5,
+      "nodes": 41
+    },
+    {
+      "score": 34.0,
+      "nodes": 26
+    },
+    {
+      "score": 35.0,
+      "nodes": 434
+    },
+    {
+      "score": 11.0,
+      "nodes": 52
+    },
+    {
+      "score": 27.5,
+      "nodes": 134
+    },
+    {
+      "score": 41.5,
+      "nodes": 396
+    },
+    {
+      "score": 30.5,
+      "nodes": 95
+    },
+    {
+      "score": 11.0,
+      "nodes": 26
+    },
+    {
+      "score": 17.5,
+      "nodes": 16
+    },
+    {
+      "score": 32.0,
+      "nodes": 32
+    },
+    {
+      "score": 72.5,
+      "nodes": 305
+    },
+    {
+      "score": 18.5,
+      "nodes": 48
+    },
+    {
+      "score": 14.0,
+      "nodes": 47
+    },
+    {
+      "score": 19.0,
+      "nodes": 78
+    },
+    {
+      "score": 13.0,
+      "nodes": 37
+    },
+    {
+      "score": 61.5,
+      "nodes": 220
+    },
+    {
+      "score": 20.5,
+      "nodes": 32
+    },
+    {
+      "score": 16.0,
+      "nodes": 23
+    },
+    {
+      "score": 50.5,
+      "nodes": 101
+    },
+    {
+      "score": 47.0,
+      "nodes": 278
+    },
+    {
+      "score": 60.5,
+      "nodes": 277
+    },
+    {
+      "score": 35.0,
+      "nodes": 212
+    },
+    {
+      "score": 11.0,
+      "nodes": 8
+    },
+    {
+      "score": 38.5,
+      "nodes": 67
+    },
+    {
+      "score": 11.0,
+      "nodes": 34
+    },
+    {
+      "score": 13.0,
+      "nodes": 31
+    },
+    {
+      "score": 11.0,
+      "nodes": 34
+    },
+    {
+      "score": 106.0,
+      "nodes": 21508
+    },
+    {
+      "score": 17.5,
+      "nodes": 26
+    },
+    {
+      "score": 29.5,
+      "nodes": 86
+    },
+    {
+      "score": 33.0,
+      "nodes": 271
+    },
+    {
+      "score": 44.5,
+      "nodes": 1053
+    },
+    {
+      "score": 52.5,
+      "nodes": 592
+    },
+    {
+      "score": 18.5,
+      "nodes": 14
+    },
+    {
+      "score": 22.5,
+      "nodes": 65
+    },
+    {
+      "score": 17.0,
+      "nodes": 98
+    },
+    {
+      "score": 11.0,
+      "nodes": 34
+    },
+    {
+      "score": 34.5,
+      "nodes": 461
+    },
+    {
+      "score": 61.5,
+      "nodes": 41
+    },
+    {
+      "score": 18.5,
+      "nodes": 48
+    },
+    {
+      "score": 31.5,
+      "nodes": 251
+    },
+    {
+      "score": 31.5,
+      "nodes": 98
+    },
+    {
+      "score": 33.0,
+      "nodes": 64
+    },
+    {
+      "score": 32.5,
+      "nodes": 223
+    },
+    {
+      "score": 30.5,
+      "nodes": 221
+    },
+    {
+      "score": 11.0,
+      "nodes": 34
+    },
+    {
+      "score": 41.5,
+      "nodes": 286
+    },
+    {
+      "score": 80.5,
+      "nodes": 343
+    },
+    {
+      "score": 52.0,
+      "nodes": 158
+    },
+    {
+      "score": 44.0,
+      "nodes": 334
+    },
+    {
+      "score": 47.5,
+      "nodes": 43
+    },
+    {
+      "score": 71.0,
+      "nodes": 577
+    },
+    {
+      "score": 41.0,
+      "nodes": 146
+    },
+    {
+      "score": 24.0,
+      "nodes": 67
+    },
+    {
+      "score": 69.0,
+      "nodes": 81
+    },
+    {
+      "score": 11.0,
+      "nodes": 35
+    },
+    {
+      "score": 83.0,
+      "nodes": 78
+    },
+    {
+      "score": 16.5,
+      "nodes": 24
+    },
+    {
+      "score": 40.5,
+      "nodes": 47
+    },
+    {
+      "score": 11.0,
+      "nodes": 8
+    },
+    {
+      "score": 11.0,
+      "nodes": 35
+    },
+    {
+      "score": 71.0,
+      "nodes": 534
+    },
+    {
+      "score": 11.0,
+      "nodes": 34
+    },
+    {
+      "score": 30.5,
+      "nodes": 167
+    },
+    {
+      "score": 11.0,
+      "nodes": 35
+    },
+    {
+      "score": 28.0,
+      "nodes": 85
+    },
+    {
+      "score": 32.0,
+      "nodes": 393
+    },
+    {
+      "score": 40.5,
+      "nodes": 114
+    },
+    {
+      "score": 63.5,
+      "nodes": 305
+    },
+    {
+      "score": 11.0,
+      "nodes": 8
+    },
+    {
+      "score": 44.0,
+      "nodes": 114
+    },
+    {
+      "score": 11.0,
+      "nodes": 26
+    },
+    {
+      "score": 12.5,
+      "nodes": 22
+    },
+    {
+      "score": 60.0,
+      "nodes": 333
+    },
+    {
+      "score": 18.5,
+      "nodes": 120
+    },
+    {
+      "score": 10.5,
+      "nodes": 15
+    },
+    {
+      "score": 24.5,
+      "nodes": 120
+    },
+    {
+      "score": 34.5,
+      "nodes": 32
+    },
+    {
+      "score": 34.5,
+      "nodes": 92
+    },
+    {
+      "score": 18.5,
+      "nodes": 14
+    },
+    {
+      "score": 14.0,
+      "nodes": 58
+    },
+    {
+      "score": 17.0,
+      "nodes": 17
+    },
+    {
+      "score": 31.5,
+      "nodes": 673
+    },
+    {
+      "score": 11.0,
+      "nodes": 8
+    },
+    {
+      "score": 34.0,
+      "nodes": 37
+    },
+    {
+      "score": 78.5,
+      "nodes": 135
+    },
+    {
+      "score": 69.5,
+      "nodes": 289
+    },
+    {
+      "score": 69.0,
+      "nodes": 1245
+    },
+    {
+      "score": 18.5,
+      "nodes": 48
+    },
+    {
+      "score": 10.5,
+      "nodes": 15
+    },
+    {
+      "score": 18.5,
+      "nodes": 59
+    },
+    {
+      "score": 8.0,
+      "nodes": 70
+    },
+    {
+      "score": 18.5,
+      "nodes": 48
+    },
+    {
+      "score": 32.0,
+      "nodes": 58
+    },
+    {
+      "score": 16.0,
+      "nodes": 57
+    },
+    {
+      "score": 60.0,
+      "nodes": 211
+    },
+    {
+      "score": 10.5,
+      "nodes": 78
+    },
+    {
+      "score": 11.0,
+      "nodes": 34
+    },
+    {
+      "score": 52.5,
+      "nodes": 1061
+    },
+    {
+      "score": 49.0,
+      "nodes": 738
+    },
+    {
+      "score": 11.0,
+      "nodes": 26
+    },
+    {
+      "score": 36.0,
+      "nodes": 178
+    },
+    {
+      "score": 22.5,
+      "nodes": 19
+    },
+    {
+      "score": 23.5,
+      "nodes": 128
+    },
+    {
+      "score": 36.0,
+      "nodes": 191
+    },
+    {
+      "score": 11.0,
+      "nodes": 8
+    },
+    {
+      "score": 42.0,
+      "nodes": 428
+    },
+    {
+      "score": 59.0,
+      "nodes": 54
+    },
+    {
+      "score": 11.0,
+      "nodes": 34
+    },
+    {
+      "score": 31.5,
+      "nodes": 100
+    },
+    {
+      "score": 69.5,
+      "nodes": 797
+    },
+    {
+      "score": 18.5,
+      "nodes": 13
+    },
+    {
+      "score": 36.5,
+      "nodes": 71
+    },
+    {
+      "score": 11.0,
+      "nodes": 34
+    },
+    {
+      "score": 22.5,
+      "nodes": 64
+    },
+    {
+      "score": 13.0,
+      "nodes": 20
+    },
+    {
+      "score": 17.0,
+      "nodes": 29
+    },
+    {
+      "score": 46.5,
+      "nodes": 484
+    },
+    {
+      "score": 23.0,
+      "nodes": 42
+    },
+    {
+      "score": 61.0,
+      "nodes": 144
+    },
+    {
+      "score": 8.0,
+      "nodes": 26
+    },
+    {
+      "score": 48.5,
+      "nodes": 122
+    },
+    {
+      "score": 11.0,
+      "nodes": 8
+    },
+    {
+      "score": 51.0,
+      "nodes": 233
+    },
+    {
+      "score": 11.0,
+      "nodes": 34
+    },
+    {
+      "score": 57.0,
+      "nodes": 81
+    },
+    {
+      "score": 42.0,
+      "nodes": 348
+    },
+    {
+      "score": 18.5,
+      "nodes": 48
+    },
+    {
+      "score": 32.5,
+      "nodes": 46
+    },
+    {
+      "score": 28.0,
+      "nodes": 187
+    },
+    {
+      "score": 11.0,
+      "nodes": 35
+    },
+    {
+      "score": 53.5,
+      "nodes": 277
+    },
+    {
+      "score": 14.0,
+      "nodes": 31
+    },
+    {
+      "score": 18.5,
+      "nodes": 75
+    },
+    {
+      "score": 45.0,
+      "nodes": 156
+    },
+    {
+      "score": 16.0,
+      "nodes": 23
+    },
+    {
+      "score": 11.5,
+      "nodes": 24
+    },
+    {
+      "score": 30.0,
+      "nodes": 68
+    },
+    {
+      "score": 43.5,
+      "nodes": 585
+    },
+    {
+      "score": 82.5,
+      "nodes": 139
+    },
+    {
+      "score": 39.0,
+      "nodes": 373
+    },
+    {
+      "score": 86.5,
+      "nodes": 509
+    },
+    {
+      "score": 18.5,
+      "nodes": 122
+    },
+    {
+      "score": 176.0,
+      "nodes": 1577
+    },
+    {
+      "score": 18.0,
+      "nodes": 76
+    },
+    {
+      "score": 104.0,
+      "nodes": 1077
+    },
+    {
+      "score": 95.5,
+      "nodes": 730
+    },
+    {
+      "score": 52.0,
+      "nodes": 261
+    },
+    {
+      "score": 19.5,
+      "nodes": 388
+    },
+    {
+      "score": 92.5,
+      "nodes": 3413
+    },
+    {
+      "score": 42.0,
+      "nodes": 266
+    },
+    {
+      "score": 46.0,
+      "nodes": 59
+    },
+    {
+      "score": 64.0,
+      "nodes": 360
+    },
+    {
+      "score": 18.5,
+      "nodes": 59
+    },
+    {
+      "score": 57.5,
+      "nodes": 323
+    },
+    {
+      "score": 88.0,
+      "nodes": 1680
+    },
+    {
+      "score": 95.0,
+      "nodes": 2517
+    },
+    {
+      "score": 112.0,
+      "nodes": 139
+    },
+    {
+      "score": 17.0,
+      "nodes": 45
+    },
+    {
+      "score": 44.0,
+      "nodes": 384
+    },
+    {
+      "score": 29.0,
+      "nodes": 109
+    },
+    {
+      "score": 62.5,
+      "nodes": 243
+    },
+    {
+      "score": 196.5,
+      "nodes": 446
+    },
+    {
+      "score": 32.0,
+      "nodes": 68
+    },
+    {
+      "score": 68.5,
+      "nodes": 841
+    },
+    {
+      "score": 27.5,
+      "nodes": 153
+    },
+    {
+      "score": 45.0,
+      "nodes": 326
+    },
+    {
+      "score": 99.0,
+      "nodes": 1687
+    },
+    {
+      "score": 53.5,
+      "nodes": 221
+    },
+    {
+      "score": 16.0,
+      "nodes": 57
+    },
+    {
+      "score": 26.5,
+      "nodes": 144
+    },
+    {
+      "score": 87.5,
+      "nodes": 1511
+    },
+    {
+      "score": 61.5,
+      "nodes": 297
+    },
+    {
+      "score": 70.5,
+      "nodes": 267
+    },
+    {
+      "score": 150.5,
+      "nodes": 526
+    },
+    {
+      "score": 16.0,
+      "nodes": 23
+    },
+    {
+      "score": 19.5,
+      "nodes": 35
+    },
+    {
+      "score": 19.5,
+      "nodes": 53
+    },
+    {
+      "score": 54.5,
+      "nodes": 89
+    },
+    {
+      "score": 92.0,
+      "nodes": 1999
+    },
+    {
+      "score": 44.5,
+      "nodes": 286
+    },
+    {
+      "score": 18.0,
+      "nodes": 94
+    },
+    {
+      "score": 33.5,
+      "nodes": 310
+    },
+    {
+      "score": 101.0,
+      "nodes": 138
+    },
+    {
+      "score": 33.5,
+      "nodes": 257
+    },
+    {
+      "score": 30.5,
+      "nodes": 84
+    },
+    {
+      "score": 51.0,
+      "nodes": 145
+    },
+    {
+      "score": 73.5,
+      "nodes": 136
+    },
+    {
+      "score": 88.0,
+      "nodes": 383
+    },
+    {
+      "score": 55.0,
+      "nodes": 607
+    },
+    {
+      "score": 77.5,
+      "nodes": 536
+    },
+    {
+      "score": 87.0,
+      "nodes": 363
+    },
+    {
+      "score": 140.0,
+      "nodes": 1488
+    },
+    {
+      "score": 18.5,
+      "nodes": 122
+    },
+    {
+      "score": 80.0,
+      "nodes": 848
+    },
+    {
+      "score": 27.0,
+      "nodes": 82
+    },
+    {
+      "score": 69.5,
+      "nodes": 425
+    },
+    {
+      "score": 53.5,
+      "nodes": 1234
+    },
+    {
+      "score": 72.5,
+      "nodes": 589
+    },
+    {
+      "score": 93.5,
+      "nodes": 1981
+    },
+    {
+      "score": 190.5,
+      "nodes": 2474
+    },
+    {
+      "score": 35.0,
+      "nodes": 221
+    },
+    {
+      "score": 111.5,
+      "nodes": 277
+    },
+    {
+      "score": 34.5,
+      "nodes": 80
+    },
+    {
+      "score": 16.0,
+      "nodes": 23
+    },
+    {
+      "score": 60.0,
+      "nodes": 148
+    },
+    {
+      "score": 18.0,
+      "nodes": 61
+    },
+    {
+      "score": 50.5,
+      "nodes": 60
+    },
+    {
+      "score": 68.5,
+      "nodes": 186
+    },
+    {
+      "score": 68.0,
+      "nodes": 1205
+    },
+    {
+      "score": 57.5,
+      "nodes": 73
+    },
+    {
+      "score": 39.5,
+      "nodes": 48
+    },
+    {
+      "score": 181.5,
+      "nodes": 2436
+    },
+    {
+      "score": 61.0,
+      "nodes": 341
+    },
+    {
+      "score": 30.5,
+      "nodes": 131
+    },
+    {
+      "score": 64.5,
+      "nodes": 138
+    },
+    {
+      "score": 33.0,
+      "nodes": 49
+    },
+    {
+      "score": 81.5,
+      "nodes": 92
+    },
+    {
+      "score": 29.5,
+      "nodes": 82
+    },
+    {
+      "score": 50.5,
+      "nodes": 154
+    },
+    {
+      "score": 69.0,
+      "nodes": 201
+    },
+    {
+      "score": 34.5,
+      "nodes": 58
+    },
+    {
+      "score": 61.0,
+      "nodes": 566
+    },
+    {
+      "score": 107.5,
+      "nodes": 843
+    },
+    {
+      "score": 27.0,
+      "nodes": 214
+    },
+    {
+      "score": 96.0,
+      "nodes": 201
+    },
+    {
+      "score": 70.0,
+      "nodes": 933
+    },
+    {
+      "score": 78.5,
+      "nodes": 999
+    },
+    {
+      "score": 26.5,
+      "nodes": 36
+    },
+    {
+      "score": 18.5,
+      "nodes": 32
+    },
+    {
+      "score": 17.0,
+      "nodes": 62
+    },
+    {
+      "score": 18.5,
+      "nodes": 75
+    },
+    {
+      "score": 35.5,
+      "nodes": 15
+    },
+    {
+      "score": 27.5,
+      "nodes": 33
+    },
+    {
+      "score": 92.0,
+      "nodes": 510
+    },
+    {
+      "score": 112.0,
+      "nodes": 1048
+    },
+    {
+      "score": 101.5,
+      "nodes": 132
+    },
+    {
+      "score": 64.0,
+      "nodes": 312
+    },
+    {
+      "score": 74.0,
+      "nodes": 296
+    },
+    {
+      "score": 60.5,
+      "nodes": 114
+    },
+    {
+      "score": 96.5,
+      "nodes": 242
+    },
+    {
+      "score": 85.5,
+      "nodes": 351
+    },
+    {
+      "score": 26.5,
+      "nodes": 111
+    },
+    {
+      "score": 81.0,
+      "nodes": 597
+    },
+    {
+      "score": 24.0,
+      "nodes": 27
+    },
+    {
+      "score": 18.0,
+      "nodes": 57
+    },
+    {
+      "score": 37.5,
+      "nodes": 49
+    },
+    {
+      "score": 131.0,
+      "nodes": 625
+    },
+    {
+      "score": 82.5,
+      "nodes": 1971
+    },
+    {
+      "score": 40.5,
+      "nodes": 36
+    },
+    {
+      "score": 20.5,
+      "nodes": 85
+    },
+    {
+      "score": 44.5,
+      "nodes": 90
+    },
+    {
+      "score": 75.5,
+      "nodes": 381
+    },
+    {
+      "score": 58.5,
+      "nodes": 98
+    },
+    {
+      "score": 52.0,
+      "nodes": 291
+    },
+    {
+      "score": 39.0,
+      "nodes": 259
+    },
+    {
+      "score": 85.0,
+      "nodes": 4678
+    },
+    {
+      "score": 52.5,
+      "nodes": 255
+    },
+    {
+      "score": 18.0,
+      "nodes": 30
+    },
+    {
+      "score": 45.0,
+      "nodes": 64
+    },
+    {
+      "score": 35.0,
+      "nodes": 170
+    },
+    {
+      "score": 56.5,
+      "nodes": 244
+    },
+    {
+      "score": 54.0,
+      "nodes": 175
+    },
+    {
+      "score": 57.5,
+      "nodes": 2414
+    },
+    {
+      "score": 29.0,
+      "nodes": 79
+    },
+    {
+      "score": 106.0,
+      "nodes": 810
+    },
+    {
+      "score": 125.5,
+      "nodes": 656
+    },
+    {
+      "score": 42.5,
+      "nodes": 204
+    },
+    {
+      "score": 27.0,
+      "nodes": 94
+    },
+    {
+      "score": 72.5,
+      "nodes": 111
+    },
+    {
+      "score": 25.5,
+      "nodes": 50
+    },
+    {
+      "score": 64.0,
+      "nodes": 310
+    },
+    {
+      "score": 84.0,
+      "nodes": 1524
+    },
+    {
+      "score": 99.5,
+      "nodes": 1893
+    },
+    {
+      "score": 25.5,
+      "nodes": 156
+    },
+    {
+      "score": 49.0,
+      "nodes": 169
+    },
+    {
+      "score": 72.5,
+      "nodes": 176
+    },
+    {
+      "score": 48.0,
+      "nodes": 113
+    },
+    {
+      "score": 15.5,
+      "nodes": 116
+    },
+    {
+      "score": 50.0,
+      "nodes": 187
+    },
+    {
+      "score": 30.0,
+      "nodes": 41
+    },
+    {
+      "score": 53.0,
+      "nodes": 846
+    },
+    {
+      "score": 26.5,
+      "nodes": 72
+    },
+    {
+      "score": 16.0,
+      "nodes": 48
+    },
+    {
+      "score": 53.5,
+      "nodes": 299
+    },
+    {
+      "score": 69.5,
+      "nodes": 579
+    },
+    {
+      "score": 50.5,
+      "nodes": 140
+    },
+    {
+      "score": 39.5,
+      "nodes": 116
+    },
+    {
+      "score": 16.0,
+      "nodes": 50
+    },
+    {
+      "score": 17.0,
+      "nodes": 45
+    },
+    {
+      "score": 26.0,
+      "nodes": 127
+    },
+    {
+      "score": 108.5,
+      "nodes": 1097
+    },
+    {
+      "score": 46.5,
+      "nodes": 288
+    },
+    {
+      "score": 32.0,
+      "nodes": 240
+    },
+    {
+      "score": 94.5,
+      "nodes": 668
+    },
+    {
+      "score": 30.0,
+      "nodes": 56
+    },
+    {
+      "score": 62.0,
+      "nodes": 168
+    },
+    {
+      "score": 41.5,
+      "nodes": 40
+    },
+    {
+      "score": 16.0,
+      "nodes": 48
+    },
+    {
+      "score": 31.0,
+      "nodes": 44
+    },
+    {
+      "score": 35.5,
+      "nodes": 155
+    },
+    {
+      "score": 53.5,
+      "nodes": 58
+    },
+    {
+      "score": 126.5,
+      "nodes": 418
+    },
+    {
+      "score": 58.5,
+      "nodes": 189
+    },
+    {
+      "score": 71.5,
+      "nodes": 567
+    },
+    {
+      "score": 40.5,
+      "nodes": 337
+    },
+    {
+      "score": 25.5,
+      "nodes": 115
+    },
+    {
+      "score": 88.5,
+      "nodes": 1148
+    },
+    {
+      "score": 62.0,
+      "nodes": 322
+    },
+    {
+      "score": 33.0,
+      "nodes": 423
+    },
+    {
+      "score": 49.0,
+      "nodes": 813
+    },
+    {
+      "score": 41.5,
+      "nodes": 104
+    },
+    {
+      "score": 54.5,
+      "nodes": 43
+    },
+    {
+      "score": 111.5,
+      "nodes": 822
+    },
+    {
+      "score": 47.5,
+      "nodes": 541
+    },
+    {
+      "score": 74.5,
+      "nodes": 1057
+    },
+    {
+      "score": 37.5,
+      "nodes": 60
+    },
+    {
+      "score": 62.0,
+      "nodes": 211
+    },
+    {
+      "score": 82.0,
+      "nodes": 908
+    },
+    {
+      "score": 83.5,
+      "nodes": 2515
+    },
+    {
+      "score": 70.0,
+      "nodes": 485
+    },
+    {
+      "score": 18.0,
+      "nodes": 86
+    },
+    {
+      "score": 30.0,
+      "nodes": 120
+    },
+    {
+      "score": 52.0,
+      "nodes": 204
+    },
+    {
+      "score": 74.0,
+      "nodes": 480
+    },
+    {
+      "score": 29.5,
+      "nodes": 287
+    },
+    {
+      "score": 99.5,
+      "nodes": 842
+    },
+    {
+      "score": 64.0,
+      "nodes": 106
+    },
+    {
+      "score": 82.0,
+      "nodes": 2198
+    },
+    {
+      "score": 76.5,
+      "nodes": 204
+    },
+    {
+      "score": 71.0,
+      "nodes": 88
+    },
+    {
+      "score": 61.5,
+      "nodes": 135
+    },
+    {
+      "score": 30.5,
+      "nodes": 44
+    },
+    {
+      "score": 19.0,
+      "nodes": 105
+    },
+    {
+      "score": 22.0,
+      "nodes": 183
+    },
+    {
+      "score": 71.5,
+      "nodes": 458
+    },
+    {
+      "score": 73.0,
+      "nodes": 93
+    },
+    {
+      "score": 24.5,
+      "nodes": 71
+    }
+  ],
+  "duration_seconds": 272.37
+}

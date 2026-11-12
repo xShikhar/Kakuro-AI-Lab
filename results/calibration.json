@@ -1,0 +1,24 @@
+{
+  "5": {
+    "n": 200,
+    "thresholds": [
+      13.0,
+      20.5,
+      34.5,
+      47.5
+    ],
+    "method": "empirical quintiles; ties stay in lower class",
+    "seeds_examined": 207
+  },
+  "6": {
+    "n": 200,
+    "thresholds": [
+      27.5,
+      44.5,
+      62.0,
+      84.0
+    ],
+    "method": "empirical quintiles; ties stay in lower class",
+    "seeds_examined": 302
+  }
+}

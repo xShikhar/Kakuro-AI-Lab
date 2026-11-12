@@ -1,0 +1,8 @@
+# Independent oracle and experiment/test dependencies; never imported by the engine.
+-r requirements.txt
+pytest>=8,<10
+pytest-cov>=6,<8
+httpx==0.28.1
+ortools>=9.12,<10
+matplotlib>=3.9,<4
+scipy>=1.14,<2

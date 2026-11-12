@@ -1,0 +1,562 @@
+[
+  {
+    "size": 5,
+    "seed": 0,
+    "unique": true,
+    "method": "random",
+    "ms": 661.895
+  },
+  {
+    "size": 5,
+    "seed": 1,
+    "unique": true,
+    "method": "repair",
+    "ms": 233.365
+  },
+  {
+    "size": 5,
+    "seed": 2,
+    "unique": true,
+    "method": "repair",
+    "ms": 266.501
+  },
+  {
+    "size": 5,
+    "seed": 3,
+    "unique": true,
+    "method": "repair",
+    "ms": 41.302
+  },
+  {
+    "size": 5,
+    "seed": 4,
+    "unique": true,
+    "method": "repair",
+    "ms": 5.12
+  },
+  {
+    "size": 5,
+    "seed": 5,
+    "unique": true,
+    "method": "repair",
+    "ms": 7.801
+  },
+  {
+    "size": 5,
+    "seed": 6,
+    "unique": true,
+    "method": "repair",
+    "ms": 390.379
+  },
+  {
+    "size": 5,
+    "seed": 7,
+    "unique": true,
+    "method": "repair",
+    "ms": 68.084
+  },
+  {
+    "size": 5,
+    "seed": 8,
+    "unique": true,
+    "method": "repair",
+    "ms": 9.639
+  },
+  {
+    "size": 5,
+    "seed": 9,
+    "unique": true,
+    "method": "repair",
+    "ms": 5.432
+  },
+  {
+    "size": 6,
+    "seed": 0,
+    "unique": true,
+    "method": "constructive",
+    "ms": 2255.937
+  },
+  {
+    "size": 6,
+    "seed": 1,
+    "unique": true,
+    "method": "repair",
+    "ms": 345.151
+  },
+  {
+    "size": 6,
+    "seed": 2,
+    "unique": true,
+    "method": "repair",
+    "ms": 129.811
+  },
+  {
+    "size": 6,
+    "seed": 3,
+    "unique": true,
+    "method": "repair",
+    "ms": 212.797
+  },
+  {
+    "size": 6,
+    "seed": 4,
+    "unique": true,
+    "method": "repair",
+    "ms": 147.672
+  },
+  {
+    "size": 6,
+    "seed": 5,
+    "unique": true,
+    "method": "repair",
+    "ms": 14.798
+  },
+  {
+    "size": 6,
+    "seed": 6,
+    "unique": true,
+    "method": "repair",
+    "ms": 358.083
+  },
+  {
+    "size": 6,
+    "seed": 7,
+    "unique": true,
+    "method": "repair",
+    "ms": 8.238
+  },
+  {
+    "size": 6,
+    "seed": 8,
+    "unique": true,
+    "method": "repair",
+    "ms": 158.693
+  },
+  {
+    "size": 6,
+    "seed": 9,
+    "unique": true,
+    "method": "constructive",
+    "ms": 2258.921
+  },
+  {
+    "size": 7,
+    "seed": 0,
+    "unique": true,
+    "method": "repair",
+    "ms": 125.955
+  },
+  {
+    "size": 7,
+    "seed": 1,
+    "unique": true,
+    "method": "repair",
+    "ms": 54.117
+  },
+  {
+    "size": 7,
+    "seed": 2,
+    "unique": true,
+    "method": "repair",
+    "ms": 57.19
+  },
+  {
+    "size": 7,
+    "seed": 3,
+    "unique": true,
+    "method": "repair",
+    "ms": 174.292
+  },
+  {
+    "size": 7,
+    "seed": 4,
+    "unique": true,
+    "method": "repair",
+    "ms": 120.147
+  },
+  {
+    "size": 7,
+    "seed": 5,
+    "unique": true,
+    "method": "repair",
+    "ms": 156.791
+  },
+  {
+    "size": 7,
+    "seed": 6,
+    "unique": true,
+    "method": "repair",
+    "ms": 99.989
+  },
+  {
+    "size": 7,
+    "seed": 7,
+    "unique": true,
+    "method": "repair",
+    "ms": 111.526
+  },
+  {
+    "size": 7,
+    "seed": 8,
+    "unique": true,
+    "method": "repair",
+    "ms": 54.26
+  },
+  {
+    "size": 7,
+    "seed": 9,
+    "unique": true,
+    "method": "repair",
+    "ms": 90.606
+  },
+  {
+    "size": 8,
+    "seed": 0,
+    "unique": true,
+    "method": "repair",
+    "ms": 493.999
+  },
+  {
+    "size": 8,
+    "seed": 1,
+    "unique": true,
+    "method": "repair",
+    "ms": 98.276
+  },
+  {
+    "size": 8,
+    "seed": 2,
+    "unique": true,
+    "method": "repair",
+    "ms": 433.029
+  },
+  {
+    "size": 8,
+    "seed": 3,
+    "unique": true,
+    "method": "repair",
+    "ms": 107.913
+  },
+  {
+    "size": 8,
+    "seed": 4,
+    "unique": true,
+    "method": "repair",
+    "ms": 251.563
+  },
+  {
+    "size": 8,
+    "seed": 5,
+    "unique": true,
+    "method": "repair",
+    "ms": 202.432
+  },
+  {
+    "size": 8,
+    "seed": 6,
+    "unique": true,
+    "method": "repair",
+    "ms": 267.531
+  },
+  {
+    "size": 8,
+    "seed": 7,
+    "unique": true,
+    "method": "repair",
+    "ms": 384.258
+  },
+  {
+    "size": 8,
+    "seed": 8,
+    "unique": true,
+    "method": "repair",
+    "ms": 285.262
+  },
+  {
+    "size": 8,
+    "seed": 9,
+    "unique": true,
+    "method": "repair",
+    "ms": 213.105
+  },
+  {
+    "size": 9,
+    "seed": 0,
+    "unique": true,
+    "method": "repair",
+    "ms": 155.093
+  },
+  {
+    "size": 9,
+    "seed": 1,
+    "unique": true,
+    "method": "repair",
+    "ms": 109.426
+  },
+  {
+    "size": 9,
+    "seed": 2,
+    "unique": true,
+    "method": "repair",
+    "ms": 515.047
+  },
+  {
+    "size": 9,
+    "seed": 3,
+    "unique": true,
+    "method": "repair",
+    "ms": 116.288
+  },
+  {
+    "size": 9,
+    "seed": 4,
+    "unique": true,
+    "method": "repair",
+    "ms": 225.237
+  },
+  {
+    "size": 9,
+    "seed": 5,
+    "unique": true,
+    "method": "repair",
+    "ms": 187.136
+  },
+  {
+    "size": 9,
+    "seed": 6,
+    "unique": true,
+    "method": "repair",
+    "ms": 158.943
+  },
+  {
+    "size": 9,
+    "seed": 7,
+    "unique": true,
+    "method": "repair",
+    "ms": 73.496
+  },
+  {
+    "size": 9,
+    "seed": 8,
+    "unique": true,
+    "method": "repair",
+    "ms": 673.636
+  },
+  {
+    "size": 9,
+    "seed": 9,
+    "unique": true,
+    "method": "repair",
+    "ms": 803.785
+  },
+  {
+    "size": 10,
+    "seed": 0,
+    "unique": true,
+    "method": "repair",
+    "ms": 341.002
+  },
+  {
+    "size": 10,
+    "seed": 1,
+    "unique": true,
+    "method": "repair",
+    "ms": 177.119
+  },
+  {
+    "size": 10,
+    "seed": 2,
+    "unique": true,
+    "method": "repair",
+    "ms": 1021.959
+  },
+  {
+    "size": 10,
+    "seed": 3,
+    "unique": true,
+    "method": "repair",
+    "ms": 236.637
+  },
+  {
+    "size": 10,
+    "seed": 4,
+    "unique": true,
+    "method": "repair",
+    "ms": 546.235
+  },
+  {
+    "size": 10,
+    "seed": 5,
+    "unique": true,
+    "method": "repair",
+    "ms": 205.19
+  },
+  {
+    "size": 10,
+    "seed": 6,
+    "unique": true,
+    "method": "repair",
+    "ms": 361.288
+  },
+  {
+    "size": 10,
+    "seed": 7,
+    "unique": true,
+    "method": "repair",
+    "ms": 384.94
+  },
+  {
+    "size": 10,
+    "seed": 8,
+    "unique": true,
+    "method": "repair",
+    "ms": 577.673
+  },
+  {
+    "size": 10,
+    "seed": 9,
+    "unique": true,
+    "method": "repair",
+    "ms": 663.161
+  },
+  {
+    "size": 11,
+    "seed": 0,
+    "unique": true,
+    "method": "repair",
+    "ms": 393.786
+  },
+  {
+    "size": 11,
+    "seed": 1,
+    "unique": true,
+    "method": "repair",
+    "ms": 810.992
+  },
+  {
+    "size": 11,
+    "seed": 2,
+    "unique": true,
+    "method": "repair",
+    "ms": 217.2
+  },
+  {
+    "size": 11,
+    "seed": 3,
+    "unique": true,
+    "method": "repair",
+    "ms": 210.957
+  },
+  {
+    "size": 11,
+    "seed": 4,
+    "unique": true,
+    "method": "repair",
+    "ms": 303.811
+  },
+  {
+    "size": 11,
+    "seed": 5,
+    "unique": true,
+    "method": "repair",
+    "ms": 420.863
+  },
+  {
+    "size": 11,
+    "seed": 6,
+    "unique": true,
+    "method": "repair",
+    "ms": 269.287
+  },
+  {
+    "size": 11,
+    "seed": 7,
+    "unique": true,
+    "method": "repair",
+    "ms": 323.377
+  },
+  {
+    "size": 11,
+    "seed": 8,
+    "unique": true,
+    "method": "repair",
+    "ms": 1143.94
+  },
+  {
+    "size": 11,
+    "seed": 9,
+    "unique": true,
+    "method": "repair",
+    "ms": 399.066
+  },
+  {
+    "size": 12,
+    "seed": 0,
+    "unique": true,
+    "method": "repair",
+    "ms": 1093.256
+  },
+  {
+    "size": 12,
+    "seed": 1,
+    "unique": true,
+    "method": "repair",
+    "ms": 489.533
+  },
+  {
+    "size": 12,
+    "seed": 2,
+    "unique": true,
+    "method": "repair",
+    "ms": 1384.973
+  },
+  {
+    "size": 12,
+    "seed": 3,
+    "unique": true,
+    "method": "repair",
+    "ms": 577.989
+  },
+  {
+    "size": 12,
+    "seed": 4,
+    "unique": true,
+    "method": "repair",
+    "ms": 383.326
+  },
+  {
+    "size": 12,
+    "seed": 5,
+    "unique": true,
+    "method": "repair",
+    "ms": 2251.104
+  },
+  {
+    "size": 12,
+    "seed": 6,
+    "unique": true,
+    "method": "repair",
+    "ms": 1878.336
+  },
+  {
+    "size": 12,
+    "seed": 7,
+    "unique": true,
+    "method": "repair",
+    "ms": 395.623
+  },
+  {
+    "size": 12,
+    "seed": 8,
+    "unique": true,
+    "method": "constructive",
+    "ms": 2270.248
+  },
+  {
+    "size": 12,
+    "seed": 9,
+    "unique": true,
+    "method": "repair",
+    "ms": 373.921
+  }
+]

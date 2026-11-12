@@ -1,0 +1,50 @@
+[
+  {
+    "size": 5,
+    "unique": true,
+    "method": "repair",
+    "ms": 21.03
+  },
+  {
+    "size": 6,
+    "unique": true,
+    "method": "repair",
+    "ms": 117.735
+  },
+  {
+    "size": 7,
+    "unique": true,
+    "method": "repair",
+    "ms": 204.206
+  },
+  {
+    "size": 8,
+    "unique": true,
+    "method": "repair",
+    "ms": 207.012
+  },
+  {
+    "size": 9,
+    "unique": true,
+    "method": "repair",
+    "ms": 181.187
+  },
+  {
+    "size": 10,
+    "unique": true,
+    "method": "repair",
+    "ms": 641.262
+  },
+  {
+    "size": 11,
+    "unique": true,
+    "method": "repair",
+    "ms": 417.517
+  },
+  {
+    "size": 12,
+    "unique": true,
+    "method": "repair",
+    "ms": 743.492
+  }
+]
