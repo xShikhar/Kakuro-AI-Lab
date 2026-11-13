@@ -1,0 +1,842 @@
+{
+  "audited_at": "2026-11-13T13:04:30.896727+05:30",
+  "source_commit": "3ffc64dc20c3ac33914eb9911e5cb2a3931be8ce",
+  "environment": {
+    "python": "3.11.9",
+    "node": "v24.14.0",
+    "platform": "Windows-10-10.0.26300-SP0"
+  },
+  "checks": {
+    "library": "10/10 unique; five levels; saved solutions, scores and human proof reports agree",
+    "historical_generation": "800 raw rows reproduce all four success rates and mean timings",
+    "historical_correlation": {
+      "n": 400,
+      "rho": 0.7777443367772254,
+      "p_value": 2.870042460884861e-82
+    },
+    "calibration": "5x5 and 6x6 thresholds independently recomputed from 200 recorded accepted samples each"
+  },
+  "library": [
+    {
+      "id": "beginner-1",
+      "name": "First light",
+      "size": 6,
+      "white_cells": 8,
+      "difficulty": "Beginner",
+      "score": 19.5,
+      "guess_levels": 0,
+      "verified_steps": 17,
+      "assumptions": 0,
+      "events": {
+        "technique_applied": 9,
+        "branch": 0,
+        "backtrack": 0,
+        "solved": 1
+      },
+      "demo": false
+    },
+    {
+      "id": "beginner-2",
+      "name": "A quiet beginning",
+      "size": 6,
+      "white_cells": 8,
+      "difficulty": "Beginner",
+      "score": 27.0,
+      "guess_levels": 0,
+      "verified_steps": 20,
+      "assumptions": 0,
+      "events": {
+        "technique_applied": 12,
+        "branch": 0,
+        "backtrack": 0,
+        "solved": 1
+      },
+      "demo": false
+    },
+    {
+      "id": "easy-1",
+      "name": "Paper trail",
+      "size": 6,
+      "white_cells": 12,
+      "difficulty": "Easy",
+      "score": 43.5,
+      "guess_levels": 0,
+      "verified_steps": 31,
+      "assumptions": 0,
+      "events": {
+        "technique_applied": 19,
+        "branch": 0,
+        "backtrack": 0,
+        "solved": 1
+      },
+      "demo": false
+    },
+    {
+      "id": "easy-2",
+      "name": "The short way home",
+      "size": 6,
+      "white_cells": 8,
+      "difficulty": "Easy",
+      "score": 33.0,
+      "guess_levels": 0,
+      "verified_steps": 22,
+      "assumptions": 0,
+      "events": {
+        "technique_applied": 14,
+        "branch": 0,
+        "backtrack": 0,
+        "solved": 1
+      },
+      "demo": false
+    },
+    {
+      "id": "medium-1",
+      "name": "Crossed paths",
+      "size": 6,
+      "white_cells": 12,
+      "difficulty": "Medium",
+      "score": 57.5,
+      "guess_levels": 0,
+      "verified_steps": 33,
+      "assumptions": 0,
+      "events": {
+        "technique_applied": 21,
+        "branch": 0,
+        "backtrack": 0,
+        "solved": 1
+      },
+      "demo": false
+    },
+    {
+      "id": "medium-2",
+      "name": "Between the lines",
+      "size": 6,
+      "white_cells": 10,
+      "difficulty": "Medium",
+      "score": 53.5,
+      "guess_levels": 0,
+      "verified_steps": 31,
+      "assumptions": 0,
+      "events": {
+        "technique_applied": 21,
+        "branch": 0,
+        "backtrack": 0,
+        "solved": 1
+      },
+      "demo": false
+    },
+    {
+      "id": "hard-1",
+      "name": "A second thought",
+      "size": 6,
+      "white_cells": 12,
+      "difficulty": "Hard",
+      "score": 82.5,
+      "guess_levels": 1,
+      "verified_steps": 36,
+      "assumptions": 1,
+      "events": {
+        "technique_applied": 25,
+        "branch": 1,
+        "backtrack": 0,
+        "solved": 1
+      },
+      "demo": false
+    },
+    {
+      "id": "hard-2",
+      "name": "The turning point",
+      "size": 6,
+      "white_cells": 15,
+      "difficulty": "Hard",
+      "score": 83.5,
+      "guess_levels": 0,
+      "verified_steps": 48,
+      "assumptions": 0,
+      "events": {
+        "technique_applied": 33,
+        "branch": 0,
+        "backtrack": 0,
+        "solved": 1
+      },
+      "demo": false
+    },
+    {
+      "id": "expert-1",
+      "name": "A beautiful contradiction",
+      "size": 6,
+      "white_cells": 16,
+      "difficulty": "Expert",
+      "score": 190.5,
+      "guess_levels": 2,
+      "verified_steps": 86,
+      "assumptions": 4,
+      "events": {
+        "technique_applied": 59,
+        "branch": 4,
+        "backtrack": 2,
+        "solved": 1
+      },
+      "demo": true
+    },
+    {
+      "id": "expert-2",
+      "name": "The long way around",
+      "size": 6,
+      "white_cells": 17,
+      "difficulty": "Expert",
+      "score": 196.5,
+      "guess_levels": 2,
+      "verified_steps": 94,
+      "assumptions": 3,
+      "events": {
+        "technique_applied": 63,
+        "branch": 3,
+        "backtrack": 1,
+        "solved": 1
+      },
+      "demo": false
+    }
+  ],
+  "benchmark_totals": {
+    "baseline": {
+      "nodes": 12664,
+      "backtracks": 12536,
+      "recorded_checks": 57072,
+      "time_ms": 255.9113
+    },
+    "mrv": {
+      "nodes": 293,
+      "backtracks": 165,
+      "recorded_checks": 31845,
+      "time_ms": 86.8606
+    },
+    "degree": {
+      "nodes": 233,
+      "backtracks": 105,
+      "recorded_checks": 22967,
+      "time_ms": 63.1308
+    },
+    "lcv": {
+      "nodes": 268,
+      "backtracks": 140,
+      "recorded_checks": 32122,
+      "time_ms": 88.77199999999999
+    },
+    "propagation": {
+      "nodes": 18,
+      "backtracks": 4,
+      "recorded_checks": 657,
+      "time_ms": 68.7521
+    },
+    "full": {
+      "nodes": 18,
+      "backtracks": 3,
+      "recorded_checks": 978,
+      "time_ms": 68.1657
+    },
+    "human": {
+      "nodes": 18,
+      "backtracks": 3,
+      "recorded_checks": 710,
+      "time_ms": 61.4512
+    }
+  },
+  "current_generation": {
+    "n": 80,
+    "successes": 80,
+    "timeout_seconds": 3,
+    "max_ms": 2271.029,
+    "recovery_count": 4,
+    "rows": [
+      {
+        "size": 5,
+        "seed": 0,
+        "unique": true,
+        "method": "random",
+        "time_ms": 625.366
+      },
+      {
+        "size": 5,
+        "seed": 1,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 310.474
+      },
+      {
+        "size": 5,
+        "seed": 2,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 318.026
+      },
+      {
+        "size": 5,
+        "seed": 3,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 43.53
+      },
+      {
+        "size": 5,
+        "seed": 4,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 5.121
+      },
+      {
+        "size": 5,
+        "seed": 5,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 9.323
+      },
+      {
+        "size": 5,
+        "seed": 6,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 433.356
+      },
+      {
+        "size": 5,
+        "seed": 7,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 64.332
+      },
+      {
+        "size": 5,
+        "seed": 8,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 9.801
+      },
+      {
+        "size": 5,
+        "seed": 9,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 5.735
+      },
+      {
+        "size": 6,
+        "seed": 0,
+        "unique": true,
+        "method": "constructive",
+        "time_ms": 2255.281
+      },
+      {
+        "size": 6,
+        "seed": 1,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 321.207
+      },
+      {
+        "size": 6,
+        "seed": 2,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 137.089
+      },
+      {
+        "size": 6,
+        "seed": 3,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 231.615
+      },
+      {
+        "size": 6,
+        "seed": 4,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 160.301
+      },
+      {
+        "size": 6,
+        "seed": 5,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 15.777
+      },
+      {
+        "size": 6,
+        "seed": 6,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 354.392
+      },
+      {
+        "size": 6,
+        "seed": 7,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 8.155
+      },
+      {
+        "size": 6,
+        "seed": 8,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 216.008
+      },
+      {
+        "size": 6,
+        "seed": 9,
+        "unique": true,
+        "method": "constructive",
+        "time_ms": 2262.963
+      },
+      {
+        "size": 7,
+        "seed": 0,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 165.742
+      },
+      {
+        "size": 7,
+        "seed": 1,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 68.358
+      },
+      {
+        "size": 7,
+        "seed": 2,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 57.285
+      },
+      {
+        "size": 7,
+        "seed": 3,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 54.118
+      },
+      {
+        "size": 7,
+        "seed": 4,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 114.751
+      },
+      {
+        "size": 7,
+        "seed": 5,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 147.322
+      },
+      {
+        "size": 7,
+        "seed": 6,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 106.358
+      },
+      {
+        "size": 7,
+        "seed": 7,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 118.859
+      },
+      {
+        "size": 7,
+        "seed": 8,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 61.882
+      },
+      {
+        "size": 7,
+        "seed": 9,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 99.51
+      },
+      {
+        "size": 8,
+        "seed": 0,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 556.072
+      },
+      {
+        "size": 8,
+        "seed": 1,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 93.476
+      },
+      {
+        "size": 8,
+        "seed": 2,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 406.185
+      },
+      {
+        "size": 8,
+        "seed": 3,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 119.61
+      },
+      {
+        "size": 8,
+        "seed": 4,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 219.076
+      },
+      {
+        "size": 8,
+        "seed": 5,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 163.248
+      },
+      {
+        "size": 8,
+        "seed": 6,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 218.816
+      },
+      {
+        "size": 8,
+        "seed": 7,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 390.83
+      },
+      {
+        "size": 8,
+        "seed": 8,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 290.356
+      },
+      {
+        "size": 8,
+        "seed": 9,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 240.006
+      },
+      {
+        "size": 9,
+        "seed": 0,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 124.59
+      },
+      {
+        "size": 9,
+        "seed": 1,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 104.187
+      },
+      {
+        "size": 9,
+        "seed": 2,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 478.018
+      },
+      {
+        "size": 9,
+        "seed": 3,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 119.886
+      },
+      {
+        "size": 9,
+        "seed": 4,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 224.802
+      },
+      {
+        "size": 9,
+        "seed": 5,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 211.779
+      },
+      {
+        "size": 9,
+        "seed": 6,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 163.118
+      },
+      {
+        "size": 9,
+        "seed": 7,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 88.23
+      },
+      {
+        "size": 9,
+        "seed": 8,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 700.981
+      },
+      {
+        "size": 9,
+        "seed": 9,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 833.865
+      },
+      {
+        "size": 10,
+        "seed": 0,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 355.177
+      },
+      {
+        "size": 10,
+        "seed": 1,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 178.692
+      },
+      {
+        "size": 10,
+        "seed": 2,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 1045.916
+      },
+      {
+        "size": 10,
+        "seed": 3,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 233.385
+      },
+      {
+        "size": 10,
+        "seed": 4,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 592.61
+      },
+      {
+        "size": 10,
+        "seed": 5,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 207.574
+      },
+      {
+        "size": 10,
+        "seed": 6,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 537.083
+      },
+      {
+        "size": 10,
+        "seed": 7,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 579.042
+      },
+      {
+        "size": 10,
+        "seed": 8,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 790.03
+      },
+      {
+        "size": 10,
+        "seed": 9,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 926.385
+      },
+      {
+        "size": 11,
+        "seed": 0,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 392.743
+      },
+      {
+        "size": 11,
+        "seed": 1,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 817.477
+      },
+      {
+        "size": 11,
+        "seed": 2,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 213.001
+      },
+      {
+        "size": 11,
+        "seed": 3,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 223.765
+      },
+      {
+        "size": 11,
+        "seed": 4,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 301.069
+      },
+      {
+        "size": 11,
+        "seed": 5,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 423.77
+      },
+      {
+        "size": 11,
+        "seed": 6,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 276.047
+      },
+      {
+        "size": 11,
+        "seed": 7,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 341.248
+      },
+      {
+        "size": 11,
+        "seed": 8,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 1157.114
+      },
+      {
+        "size": 11,
+        "seed": 9,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 387.563
+      },
+      {
+        "size": 12,
+        "seed": 0,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 1108.046
+      },
+      {
+        "size": 12,
+        "seed": 1,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 472.189
+      },
+      {
+        "size": 12,
+        "seed": 2,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 1394.835
+      },
+      {
+        "size": 12,
+        "seed": 3,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 575.252
+      },
+      {
+        "size": 12,
+        "seed": 4,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 394.448
+      },
+      {
+        "size": 12,
+        "seed": 5,
+        "unique": true,
+        "method": "constructive",
+        "time_ms": 2268.603
+      },
+      {
+        "size": 12,
+        "seed": 6,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 1767.431
+      },
+      {
+        "size": 12,
+        "seed": 7,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 400.494
+      },
+      {
+        "size": 12,
+        "seed": 8,
+        "unique": true,
+        "method": "constructive",
+        "time_ms": 2271.029
+      },
+      {
+        "size": 12,
+        "seed": 9,
+        "unique": true,
+        "method": "repair",
+        "time_ms": 373.191
+      }
+    ]
+  },
+  "sha256": {
+    "data/puzzles.json": "231f881a6539c0647bffd8253d40fb1630b6606a0942351f4ca18f9677e4ce95",
+    "results/benchmark.csv": "c8464bf6a594054b133dc4511f1c93f057e0d7058e05f676e2e84e72a1c2e2f0",
+    "results/generation.csv": "290c8dbc597dd3f0bc64761932b717d3dda9dbf461c78463c79379172da7f35b",
+    "results/generated_corpus.json": "3ca5043b6304709ad7a245c6178c51c145a2dbae480261bde8e39c994abcccc3",
+    "results/calibration.json": "0a3f36a6480bf33e84560369cc10450f7057194b3b9f60fcf0bbe000c7e02e05"
+  },
+  "browser_qa": {
+    "verified": false,
+    "reason": "Retry after restart still failed in browser-tool Statsig initialization; no rendered screenshots, viewport or console audit claimed."
+  },
+  "verification": {
+    "backend_tests_passed": 345,
+    "frontend_tests_passed": 13,
+    "core_statements": 733,
+    "core_statements_covered": 698,
+    "core_coverage_percent": 95.22510231923602,
+    "production_build": "passed",
+    "live_http_smoke": "passed after restart",
+    "runtime_code_changes_during_audit": false
+  },
+  "review_scope_notes": [
+    "Non-mutating timeline text is not semantically certified by the deduction verifier.",
+    "Human check counts omit unsuccessful catalogue search.",
+    "Frozen generator tables describe the pre-recovery policy; current reruns are new-policy experiments.",
+    "Repair log coordinates overlay the accepted canvas and do not reconstruct past generator states.",
+    "Calibration for sizes 7\u201312 and rendered browser/mobile/console/accessibility QA remain incomplete."
+  ]
+}

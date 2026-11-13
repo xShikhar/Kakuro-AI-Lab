@@ -14,6 +14,8 @@ Every human reduction carries exact antecedent domains, ordered clue scopes, tar
 
 The independent checker brute-force enumerates each premise run with its own recursion, then joins their information by iterated support filtering. It rejects deletion of any independently supported value. A full-trace check additionally binds premise domains to replay state and scopes/targets to the original board. It verifies deductions conditional on any earlier explicitly marked guesses. It does not claim that a guessed digit is a theorem, or that a technique label proves uniqueness.
 
+The verified counter includes reduction events and redundant forced-singleton announcements, not every distinct technique or every trace event. Non-mutating constraint-evaluation, heuristic-selection and contradiction messages are structurally checked but not independently certified for semantic truth. The verifier's independence is from technique/solver logic; board parsing is shared. Human's check metric counts accepted premise scopes only and omits unsuccessful catalogue applications.
+
 ## Diagnosis
 
 Starting from clues and player entries, breadth-first search explores individual catalogue applications. The first dequeued contradiction has minimum deduction count in this catalogue graph (including the final contradiction step). Time/state caps may prevent a result; the response is then inconclusive, never a claim of correctness. A second bounded search enumerates clue subsets in increasing cardinality and decides each with complete custom CSP search. If it finishes at an unsatisfiable subset, it proves the minimum number of clues **conditional on the supplied player entries**. This is not a minimum joint set of clues and entry assumptions.

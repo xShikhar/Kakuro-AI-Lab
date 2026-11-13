@@ -2,7 +2,11 @@
 
 ### Small cells. Deep reasoning.
 
-Kakuro AI Lab is an offline, explainable constraint-satisfaction platform: a playable puzzle room, a live solver laboratory, a fair strategy arena and an ambiguity-guided generator. Its two research contributions are **proof-carrying human-technique deductions with bounded shortest-conflict diagnosis**, and **solution-disagreement-guided clue repair with behavior-based difficulty**. Every decision, elimination, branch and benchmark comes from a custom pure Python engine. React makes that reasoning inspectable and reversible; FastAPI connects the two without external AI services.
+Kakuro AI Lab is an offline, explainable constraint-satisfaction platform: a playable puzzle room, a live solver laboratory, a fair strategy arena and an ambiguity-guided generator. Its two project contributions are **proof-carrying human-technique deductions with bounded shortest-conflict diagnosis**, and **solution-disagreement-guided clue repair with behavior-based difficulty**. Every decision, elimination, branch and benchmark comes from a custom pure Python engine. React makes that reasoning inspectable and reversible; FastAPI connects the two without external AI services. These are contributions to this academic project, not claims of being the first such ideas in the research literature.
+
+> **Final audit: 13 November 2026, after a PC restart.** The implementation passed 345 backend tests, 13 frontend tests, the production build and the live HTTP smoke test. Core line coverage is 95.23%. All ten library puzzles were rechecked for uniqueness, stored solutions, difficulty scores and human proof validity; the current generator passed 80/80 fresh requests across sizes 5–12. The main research tables are frozen historical measurements, distinguished from this current-code audit below. Calibration for sizes 7–12 and rendered browser/mobile QA remain incomplete. Use the evidence and claim limits in this file when creating the presentation.
+
+**Repository:** [xShikhar/Kakuro-AI-Lab](https://github.com/xShikhar/Kakuro-AI-Lab) · **Audit evidence:** [`results/final-audit.json`](results/final-audit.json) · **Start after a restart:** [section 13](#13-installation-launch-and-troubleshooting) · **Slide outline and demo:** [section 14](#14-presentation-guide)
 
 ## 1. Problem statement and motivation
 
@@ -101,9 +105,38 @@ The frontend sends JSON to the API. The API validates structure, then calls the 
 
 Saved entries, notes, undo/redo stacks, timer, completed-game history and the most recent arena results stay in browser localStorage. Generated games use puzzle-content identity so two different outputs cannot accidentally share saved entries. Built-in witness solutions remain server-side until an explicit reveal/solve request.
 
+### Runtime boundaries
+
+| Boundary | Current contract |
+|---|---|
+| Board model | JSON dimensions 3–12; every white cell has an across and down run of length 2–9 |
+| Built-in library | Ten verified 6×6 boards, two per difficulty; board size includes black/clue cells |
+| Generator | Sizes 5–12; random fill, ambiguity repair, then bounded constructive recovery if needed |
+| Solver Lab | One selected puzzle; 100,000-node / 15-second solve cap; real NDJSON events |
+| Strategy Arena | Selected built-ins/current puzzle; all chosen strategies share a 100,000-node / 3-second cap |
+| Proof verification | Runs after human solving; its time is excluded from the displayed engine solve time |
+| Storage | Browser localStorage; no database, account, registration or external LLM |
+| Offline operation | Both local services must be running; dependencies are installed once; this is not a PWA |
+
+API routes are `GET /api/health`, `/api/puzzles`, `/api/experiments`, `/api/results/{filename}`, and `POST /api/solve`, `/api/solve/stream`, `/api/check`, `/api/hint`, `/api/diagnose`, `/api/generate`, `/api/arena`. FastAPI's local `/docs` describes request fields and validation. Library responses omit witness solutions; the explicit solver endpoints return them.
+
+Solver Lab elapsed time includes trace creation and event-emission/queue overhead inside the solve. Arena disables tracing/emission, so it is the appropriate interface for algorithm timing comparisons.
+
 ## 6. Algorithms, simply explained
 
 All configurations implement the same bounded interface and return a validated solution, solution count, status, metrics and optional trace. `limit` is distinct from `unsatisfiable`. `unique` is returned only after enumeration with a solution limit of at least two finishes with one solution. Reaching two proves `multiple`. Finding one while counting stops early only establishes `solved`.
+
+| Configuration key | Variable order | Value order | Inference before branching |
+|---|---|---|---|
+| `baseline` | Fixed row order | Ascending digits | Partial distinctness and attainable-sum checks |
+| `mrv` | Minimum current legal-value count | Ascending legal digits | Same partial checks; no domain propagation |
+| `degree` | MRV, then most unassigned neighbors | Ascending legal digits | Same partial checks; no domain propagation |
+| `lcv` | MRV + degree | Estimated least neighbor impact first | Same partial checks; no fixed-point propagation |
+| `propagation` | Fixed row order | Ascending remaining digits | Exact run-tuple support to a fixed point |
+| `full` | MRV + degree | LCV | Exact run-tuple support to a fixed point |
+| `human` | Easiest deduction first; MRV + degree when guessing | LCV when guessing | Ranked technique catalogue, including crossing-run support |
+
+LCV estimates direct neighbor impact using partial run consistency; it does not perform a complete hypothetical solve for every value. Heuristics only reorder search and cannot add a valid solution or remove one.
 
 ### Basic backtracking
 
@@ -120,6 +153,8 @@ search(state):
 ```
 
 Worst-case time is exponential, `O(9^n)` search states with run-check overhead. Copying domains at each child provides straightforward, correct restoration. Baseline does not quietly perform full propagation.
+
+Domain copies use roughly `O(n × search depth)` storage along the active recursion path. Tuple tables and the optional event trace add separate storage costs; a complete trace can grow with explored search. Node/time caps bound the run's work, rather than constituting a hard memory quota.
 
 ### Minimum Remaining Values (MRV)
 
@@ -204,7 +239,9 @@ Hidden singles require that the digit be mandatory in the run, since Kakuro does
 
 Each certificate contains `technique`, `rank`, `runs`, `cells`, `premises.domains`, `premises.constraints` and `conclusion`. The premises record the exact current candidate sets and clue scopes/targets. The conclusion records the reduced domains. A separate module, importing no technique implementation, brute-force enumerates the premises and checks that every deleted candidate lacks support.
 
-The full verifier additionally checks initialization against supplied entries, binds clues to the actual board, validates branch/assignment transitions, checks exact parent restoration and validates solved snapshots. A valid prefix cannot authenticate a fabricated later forced digit. The UI reports verified deduction/forced-assignment steps separately from assumptions; corrupted proof and mutation regression tests exercise this boundary.
+The trace verifier additionally checks initialization against supplied entries, binds clues to the actual board, validates branch/assignment transitions, checks exact parent restoration and validates solved snapshots. A valid prefix cannot authenticate a fabricated later forced digit. The UI reports verified deduction/forced-assignment steps separately from assumptions; corrupted proof and mutation regression tests exercise this boundary.
+
+**Exactly what the verification counter means:** it counts `technique_applied`, `eliminate_candidate` and forced-assignment announcements that pass independent entailment/state checks. A forced assignment can announce a singleton already established by a technique event, so the count is not the number of distinct human techniques. Search branches are explicit assumptions. Non-mutating `constraint_eval`, `heuristic_select` and `contradiction` timeline messages are structurally checked but their wording, numeric summaries and semantic assertions are not independently certified. A valid report therefore does **not** mean that every sentence in the timeline has been formally proved. The separate diagnosis algorithm's shortest-chain/core claims have the bounded objectives described below.
 
 ### Worked proof and conflict
 
@@ -219,6 +256,8 @@ For harder mistakes, breadth-first search explores technique applications until 
 Hints progress from run nudge, to easiest technique name, to a cell reveal established by uniqueness checking. The first levels never reveal a solution. Check board distinguishes immediate rule violations from global incompatibility. Reveal cell, across run and complete solution are explicit actions; full reveal asks for confirmation.
 
 The lab shows real domain initialization, constraint evaluation, candidate elimination, assignment, heuristic selection, branching, contradiction, backtracking, technique application and solved events. Before/after domains, affected scopes, reasons, MRV candidate counts, degree and LCV impacts remain inspectable. Beginner, Technical and Research wording is deterministic. Playback supports play/pause, forward/back, speed, first/last and event-slider jumps. The search topology visualizes actual branch depths; a deduction-only solve correctly has no search tree.
+
+The verified demonstration puzzle is **`expert-1` / “A beautiful contradiction”**. Its human run emits 102 actual events, including 59 technique applications and four branch assumptions; 86 deduction/forced-assignment announcements pass the verifier. The larger verified-step count includes singleton announcements after deductions. The demo's Full CSP run also contains genuine heuristic selection and backtracking, which is asserted by the library regression test.
 
 The contribution is the **checkable connection between explanation and state**, plus bounded shortest conflict analysis, rather than an attractive log of unverifiable prose.
 
@@ -238,6 +277,8 @@ Repairs favor edits with fewer valid digit combinations in the affected runs and
 
 **Generation reliability update:** grids 7–12 use connected, randomized short-run layouts. If random repair attempts yield no rated unique puzzle, a reserved part of the same deadline permits one fresh constructive fill, followed by complete uniqueness checking and real difficulty rating. The response identifies recovery explicitly. The original paired experiment tables below were recorded before this policy change and are historical results, not new measurements of recovery. See [the diagnosis and regression notes](docs/generator-reliability.md).
 
+The current policy reserves `min(1 second, 25% of the total timeout)` for recovery; ordinary human rating cannot consume that reserve. Random mode has no constructive recovery. A recovery fill uses an algorithmic three-color pattern with a randomized orientation/extremal palette; its solution is not looked up from the library. It still must pass solution counting and actual human rating. This path has less layout/digit diversity than general random fill and can return a different measured difficulty than requested; the response identifies the method and target mismatch. A generator timeout remains possible under sufficiently small limits or slow hardware.
+
 ### Recorded repair example
 
 The first logged 5×5 calibration example found disagreement at `(2,1), (2,4), (3,1), (3,2), (3,4), (4,1), (4,2)` (zero-based coordinates). Repair changed witness cell `(3,4)` from 7 to 3, updating `down:1,4` and `across:3,0`, then counted solutions again. This is an actual record in `results/generated_corpus.json`, not a scripted explanation. A single repair is not assumed to establish uniqueness; only the subsequent solution count can do that.
@@ -252,19 +293,37 @@ difficulty_score = Σ technique ranks
 
 The trace includes work on failed branches because that is real solving effort. Beginner/Easy/Medium/Hard/Expert thresholds are empirical quintiles per grid size, with tied scores kept in the lower class. The recorded thresholds are `[13,20.5,34.5,47.5]` for 5×5 and `[27.5,44.5,62,84]` for 6×6, each calibrated on 200 accepted unique puzzles. A label is relative to size; an Easy 6×6 score can exceed a Medium 5×5 score.
 
+Technique ranks/weights 1–7 are design choices, not learned coefficients. Quantiles describe the recorded generator sample; no human-participant study or held-out human difficulty validation has been performed. Seeds control random choices, while time caps and machine load can change which attempt completes and whether recovery is needed.
+
 This uses solver behavior rather than clue count, and makes ambiguity informative rather than discarding every ambiguous fill. It is still an empirical proxy for human difficulty. Sizes 7–12 currently use provisional thresholds and explicitly return `calibrated: false`; the requested 200-success calibration for each of those larger sizes remains unfinished.
+
+### Current generator regression evidence
+
+The post-restart audit generated ten seeds (`0–9`) at each of sizes 5–12 under a three-second cap: **80/80 returned unique puzzles**. Each returned witness was checked against every constraint, then each puzzle was counted again to two solutions. These are current-policy regression observations, not a replacement for a 200-seed-per-size research study or a universal success/latency guarantee. Per-run times, methods and the maximum observed time are recorded in [`results/final-audit.json`](results/final-audit.json).
 
 ## 9. Experimental methodology
 
 The recorded environment is Python 3.11.9 on Windows. The arena tests ten unique built-ins, two per level, using all seven configurations with 100,000 nodes and a 3-second cap per run. Input JSON, stopping rules, digit order and metric definitions are consistent. Tracing, streaming, rendering and independent proof verification are disabled during timed arena solves.
 
-Metrics are recursive nodes, parent restorations/backtracks, assignments including forced singletons, high-level run constraint evaluations, candidate eliminations, maximum depth, solutions found and elapsed milliseconds. Human technique steps and guess depth are reported separately. Run checks are not a count of every arithmetic operation performed during tuple enumeration. The timer starts after board parsing; UI, network and JSON costs are excluded. Single-run timing is noisy, so close speed differences should not be overinterpreted.
+Metrics are recursive nodes, parent restorations/backtracks, assignments including forced singletons, recorded constraint checks, candidate eliminations, maximum depth, solutions found and elapsed milliseconds. Human technique steps and guess depth are reported separately. For the six non-human configurations, checks record calls to high-level run predicates/support evaluation; they do not count every arithmetic operation inside tuple enumeration. **Human's checks count accepted certificate premise scopes and omit unsuccessful catalogue-search evaluations. They are not directly comparable as total constraint-evaluation work.** Use elapsed time, technique steps, guess depth and nodes with this caveat. The timer starts after board parsing; UI, network, JSON and independent proof verification costs are excluded. Single-run timing is noisy; close speed differences should not be overinterpreted.
 
 The generation comparison uses paired seeds 0–199 at each of sizes 5 and 6: 800 runs total across repair and random modes. Both have 20 outer attempts and a 0.6-second cap. Repair may make up to 20 targeted changes per attempt; random mode tries one fresh fill per attempt. Random streams diverge after method-specific operations. The measured result applies to these declared budgets and generator distribution.
 
 Calibration supplements successful paired repair runs with additional fresh seeds until there are 200 unique puzzles per size. The 400 accepted puzzles supply the effort-correlation experiment. Baseline runs have a one-second/100,000-node cap; censored observations would be excluded and counted. The pooled correlation can be influenced by puzzle size and is not causal evidence.
 
-Reproduce from the repository root:
+### Recompute the frozen evidence without rerunning generation
+
+The 13 November audit recomputed the four generation success rates and mean timings from the 800 CSV rows, recomputed Spearman correlation from the 400 recorded corpus entries, and recomputed both calibration quantile sets. All matched the stored summaries. The audit includes SHA-256 hashes of the underlying files. The tables and charts below can be rebuilt from these frozen records:
+
+```powershell
+.\.venv\Scripts\python -m scripts.report
+```
+
+### Run a new experiment with the current generator
+
+The following commands **create a new current-policy dataset**. They do not reproduce the pre-recovery generation algorithm or its exact historical rates. The repository's initial published commit already contains the recovery fix, so an exact pre-fix executable revision is not included. Existing raw observations remain available for independent reanalysis.
+
+The experiment and library scripts currently write directly to `results/` and `data/puzzles.json`; use a separate checkout or preserve those directories before running them if the frozen presentation evidence should remain unchanged:
 
 ```powershell
 .\.venv\Scripts\python -m scripts.experiments --count 200 --sizes 5 6 --budget 0.6
@@ -273,7 +332,11 @@ Reproduce from the repository root:
 .\.venv\Scripts\python -m scripts.oracle_corpus
 ```
 
+The current CSV runner records requested mode (`repair`/`random`), rather than each returned generation method. A new `repair` run therefore includes any constructive recovery; it is not a method-stratified isolation of repair alone. A new research claim about repair versus recovery needs that additional instrumentation and a fresh study.
+
 ## 10. Real measured results and ablation analysis
+
+**Dataset identity:** the strategy table is the recorded 70-run comparison on the shipped ten-puzzle library. The generator table and correlation are the **historical pre-recovery policy**, using 200 paired seeds per size/method at sizes 5 and 6. Current-policy generation reliability is reported separately in section 8. Do not label the historical rates as success rates for the current recovery-enabled generator. The paired comparison also uses different per-attempt work (up to 20 repairs versus one fresh fill), a fixed strategy order and single timings; it is evidence for the declared implementation/budgets, not an isolated universal causal effect of repair.
 
 <!-- MEASURED_RESULTS_START -->
 
@@ -302,6 +365,8 @@ Recorded environment: Python 3.11.9 on Windows-10-10.0.26300-SP0. Experiment wal
 
 <!-- MEASURED_RESULTS_END -->
 
+**Check-count footnote:** Human's 710 recorded checks count accepted proof-premise scopes, while unsuccessful technique searches are omitted. It is not a total work count comparable to the other rows. The node, backtrack and timing columns retain their documented meanings; timing includes technique-search work.
+
 ![Ablation: actual node counts and runtime](results/ablation.png)
 ![Search effort by measured difficulty](results/by-difficulty.png)
 ![Paired repair versus random generation](results/repair-vs-random.png)
@@ -323,10 +388,14 @@ Raw evidence: [`generation.csv`](results/generation.csv), [`generated_corpus.jso
 | Play | Input, run highlights, notes, history, timer, checks, three hint levels and reveals | `docs/screenshots/02-play.png`: a selected cell with notes and an open hint |
 | AI Solver Lab | Streamed candidate reductions, heuristic explanation, proof counts and replay | `docs/screenshots/03-lab.png`: Human Logic at a certified deduction, premises expanded |
 | Strategy Arena | Identical-input comparison, ablation chart, complete rows and experiment evidence | `docs/screenshots/04-arena.png`: current Expert puzzle after all strategies finish |
-| Puzzle Generator | Seed controls, uniqueness, honest target result and repair notebook | `docs/screenshots/05-generator.png`: generated unique puzzle with one actual repair highlighted |
+| Puzzle Generator | Seed controls, uniqueness, honest target result and repair notebook | `docs/screenshots/05-generator.png`: accepted puzzle plus its real repair log; label the attempt number |
 | Demonstration Mode | Real initial domains, propagation, decisions, backtrack and solution | `docs/screenshots/06-demo.png`: Expert trace paused at a real backtrack |
 
-These are deliberate screenshot placeholders, not claims that images have been captured. Browser automation in this environment was blocked by its Windows URL safety check; rendered desktop/mobile and console QA remain unverified. Before presenting, capture these six files and inspect 320, 768, 1024 and 1440px widths. See [`docs/verification.md`](docs/verification.md).
+These are deliberate screenshot placeholders, not claims that images have been captured. A retry after the PC restart still failed during the browser tool's Statsig initialization; the earlier native fallback had also stopped at Windows URL safety detection. Rendered desktop/mobile and console QA remain unverified. Before presenting, capture these six files and inspect 320, 768, 1024 and 1440px widths. See [`docs/verification.md`](docs/verification.md).
+
+The repair notebook retains logs across failed and accepted attempts. Selecting a log overlays its coordinates on the final accepted canvas; it does **not** reconstruct the historical board or the witness before that repair. An earlier attempt can have a different layout, and even a log from the accepted attempt can precede later clue edits. Present the notebook as a recorded repair explanation with coordinate highlighting, not as event-sourced generator replay. Solver replay, by contrast, reconstructs actual past domains.
+
+Four real chart assets are ready for the presentation: `results/ablation.png`, `results/by-difficulty.png`, `results/repair-vs-random.png` and `results/difficulty-effort.png`. Keep the historical-policy label on the last two. Use the worked grid in section 3 for an editable diagram; do not fabricate UI screenshots.
 
 The UI uses local system fonts, paper/ink/sage/orange tokens, semantic buttons, keyboard focus indicators and reduced-motion support. All six destinations preserve the current puzzle and shared solver/game state. Candidate and clue highlights communicate real engine state. The board remains the visual center of the app.
 
@@ -338,6 +407,8 @@ Tests cover malformed boards, digit/sum/duplicate constraints, all strategies, u
 
 **Independent oracle:** 300 recorded randomly generated unique 5×5 puzzles are encoded separately in OR-tools CP-SAT, with integer domains, AllDifferent and sum equations. Every custom strategy must count a unique solution and agree with the oracle. Human traces must also pass the independent proof checker. OR-tools is never imported by production engine code.
 
+This is independence of the solving algorithm: the CP-SAT test reuses `Board` to obtain run scopes, so it is not an independent JSON/parser implementation. Hand-checked structure/invalid-input tests provide separate model-boundary evidence. Likewise, the 300 samples are small 5×5 generated puzzles, not a claim of exhaustive verification over all sizes.
+
 Frontend tests exercise real reducer transitions and DOM controls: entry/delete, pencil marks, undo/redo, completed-game reopening, distinct generated identities, keyboard navigation, paused state, replay stepping/slider/play, timer persistence, completion recording and stale reveal protection. Only the HTTP boundary is controlled for timing-dependent component tests.
 
 ```powershell
@@ -346,7 +417,7 @@ npm --prefix frontend test
 npm --prefix frontend run build
 ```
 
-With both services running, `python -m scripts.smoke` exercises the actual HTTP stream, verified proofs, all hint levels, completion/mistake checks, diagnosis, seven-strategy arena, generation and artifact downloads. The final recorded run passed; see [`results/live-smoke.json`](results/live-smoke.json). This remains API verification rather than rendered browser QA.
+With both services running, `.\.venv\Scripts\python -m scripts.smoke` exercises the actual HTTP stream, verified proofs, all hint levels, completion/mistake checks, diagnosis, seven-strategy arena, generation and artifact downloads. It passed again after the PC restart; see [`results/live-smoke.json`](results/live-smoke.json). This is API verification rather than rendered browser QA. The independent final audit additionally validates the library scores/proofs and reanalyzes the frozen research files; see [`results/final-audit.json`](results/final-audit.json).
 
 On a restrictive Windows sandbox, FastAPI TestClient may hang while asyncio creates a loopback socket pair. Run these API tests from a normal local terminal with loopback access. This environment also emitted a Starlette/httpx migration deprecation warning; it did not invalidate the passing API tests.
 
@@ -354,7 +425,30 @@ On a restrictive Windows sandbox, FastAPI TestClient may hang while asyncio crea
 
 Requirements: **Python 3.11+**, **Node.js 22.12+ or a supported newer LTS** (tested with Node 24), npm, and Internet access for the initial package installation only. No API keys or accounts are needed.
 
-From `C:\Project\AI PROJECT`, first install:
+### After restarting this PC — no reinstallation needed
+
+Open two terminals in `C:\Project\AI PROJECT`. Start the backend and frontend with the two commands below, then open [the app](http://127.0.0.1:5173). The processes stop when Windows restarts; restarting the PC does not automatically relaunch them. The existing `.venv`, `frontend/node_modules`, data and results remain installed on disk. Browser localStorage progress remains available when using the same browser profile and the same URL/port.
+
+```powershell
+# Terminal 1, in C:\Project\AI PROJECT
+.\.venv\Scripts\python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+```
+
+```powershell
+# Terminal 2, in C:\Project\AI PROJECT
+npm --prefix frontend run dev -- --port 5173 --strictPort
+```
+
+`--strictPort` avoids silently moving to a different frontend origin and making saved games appear missing. Verify [backend health](http://127.0.0.1:8000/api/health) and the app before class. No PowerShell activation-policy change is needed because the commands call the virtual-environment interpreter directly.
+
+### First installation on a new machine
+
+```powershell
+git clone https://github.com/xShikhar/Kakuro-AI-Lab.git
+cd Kakuro-AI-Lab
+```
+
+From the repository root (`C:\Project\AI PROJECT` on this PC, or the cloned directory on a new machine), install:
 
 ```powershell
 python -m venv .venv
@@ -363,6 +457,8 @@ npm --prefix frontend ci
 ```
 
 Runtime-only Python installation can use `requirements.txt`. The dev requirements add the independent oracle, test coverage, statistics and plotting packages. `requirements-lock.txt` records the tested Python environment; `frontend/package-lock.json` records npm dependencies.
+
+The final audited environment was Python 3.11.9, Node v24.14.0 and Windows 10 build 26300. Tests/build were rerun after the restart rather than inferred from the earlier session. For the installed Python versions exactly, use `requirements-lock.txt`; the range-based files allow compatible updates.
 
 **Backend — one command in terminal 1, from the repository root:**
 
@@ -373,7 +469,7 @@ Runtime-only Python installation can use `requirements.txt`. The dev requirement
 **Frontend — one command in terminal 2, from the repository root:**
 
 ```powershell
-npm --prefix frontend run dev
+npm --prefix frontend run dev -- --port 5173 --strictPort
 ```
 
 Open [Kakuro AI Lab](http://127.0.0.1:5173). Interactive API documentation is at [FastAPI docs](http://127.0.0.1:8000/docs). After installation, disconnect from the Internet: browser assets and reasoning remain local. Keep both local services running; this is a local web application, not an installable offline PWA. To stop a service, press Ctrl+C in its terminal.
@@ -384,7 +480,7 @@ Open [Kakuro AI Lab](http://127.0.0.1:5173). Interactive API documentation is at
 | Port already in use | Stop the earlier server, or update Vite's proxy when changing the backend port |
 | `No module named …` | Use the `.venv` interpreter and install the relevant requirements |
 | `npm ci` fails | Check initial network access and Node version; retain the lockfile |
-| Empty library | Run `python -m scripts.experiments …`, then `python -m scripts.build_library`; the built-in data normally ships ready |
+| Empty library | Restore the shipped `data/puzzles.json` from Git; only rebuild experiments/library intentionally, since those scripts overwrite frozen data |
 | Generator returns no puzzle | This is an honest budget failure; try a smaller grid, another seed or Any target |
 | Target not reached | Inspect the measured returned label; generation does not silently fake the requested level |
 | Solver says `limit` | No unsatisfiability or uniqueness claim follows; use another configuration or larger allowed cap |
@@ -393,6 +489,25 @@ Open [Kakuro AI Lab](http://127.0.0.1:5173). Interactive API documentation is at
 On macOS/Linux use `python3 -m venv .venv` and `.venv/bin/python` in place of the Windows interpreter path. Run from the repository root so module imports resolve. Installation does not contact a paid service or download an AI model.
 
 ## 14. Presentation guide
+
+### Evidence that can go directly onto slides
+
+| Claim | Exact evidence and qualification |
+|---|---|
+| “Custom offline CSP engine with explainable search” | Standard-library Python engine; seven configurations; local FastAPI/React operation; no external LLM |
+| “Proof-carrying human deductions” | Seven ranked techniques; independent entailment enumeration; `expert-1` human run has 86/86 verified deduction/forced-assignment announcements, with four assumptions separately identified |
+| “Bounded shortest conflict diagnosis” | BFS minimizes catalogue applications when it reaches a contradiction; clue-cardinality minimization is separate and conditions on fixed entries |
+| “Propagation reduced search on our benchmark” | Recorded library totals: baseline 12,664 nodes; Full CSP 18; all ten identical puzzles solved by all seven configurations |
+| “Repair helped our original generator” | Historical 800-run paired study: 5×5 97% vs 50.5%, 6×6 68% vs 5%, under stated budgets; these are not current recovery-policy success rates |
+| “Difficulty is associated with search effort” | Recomputed historical pooled Spearman ρ = 0.7777, n = 400; not causal, not human difficulty validation, potentially size-confounded |
+| “Current generation works across the selectable sizes” | Final audit: 80/80 seeded requests across sizes 5–12 under a three-second cap, followed by re-counting; a sampled regression result, not a universal guarantee |
+| “The automated verification passes” | Post-restart 345 backend tests, 13 frontend tests, 95.23% core coverage, production build and live API smoke pass; rendered browser/mobile QA is still unverified |
+
+Do not claim world-first research novelty, proof of every timeline sentence, globally shortest mathematical proofs, a minimum joint clue/cell/entry core, minimum-edit repairs, empirical calibration at all eight sizes, universal generator success, human-validated difficulty, or a completed visual/accessibility audit. The implementation and measured observations support the narrower claims in this table.
+
+### Dataset and asset mapping
+
+Use the architecture diagram and worked CSP grid in sections 3–5 as editable explanatory visuals. Use the four chart PNGs in section 10 with their dataset/policy labels. Use `results/benchmark.csv` for editable strategy tables/charts, `results/generation.csv` for the historical generator comparison, and `results/final-audit.json` for current regression/library evidence. The ten-puzzle benchmark is entirely 6×6; it is not a benchmark spanning every generated size. No real UI screenshots have been captured yet.
 
 ### Suggested slide outline, drawn entirely from this README
 
@@ -413,19 +528,19 @@ On macOS/Linux use `python3 -m venv .venv` and `.venv/bin/python` in place of th
 
 ### Five-minute live demonstration
 
-**0:00–0:35:** Open Demonstration Mode. Reset the demonstration and point out that the preselected puzzle was measured to backtrack. Explain the initial nine-digit domains and the two run constraints per cell.
+**0:00–0:35:** Open Demonstration Mode and Reset demonstration. Confirm **`expert-1` / “A beautiful contradiction”** and **Full CSP**. The default configuration is Full CSP, not baseline. Explain the initial nine-digit domains and the two run constraints per cell. The library test establishes that this exact puzzle/configuration includes real backtracking.
 
 **0:35–1:20:** Select Full CSP and Run solver. Jump to Propagation, inspect a real candidate removal and the responsible clue. Step forward/back to show domains reconstruct, rather than repainting a fixed animation.
 
-**1:20–2:05:** Jump to Decision. Read actual MRV counts, degree and LCV impacts in the event. On an Expert puzzle Full CSP includes real backtracks; if using the automatically selected baseline demonstration, inspect its backtrack and rerun Full CSP to compare inference. Search-tree nodes come from real branch events.
+**1:20–2:05:** Jump to Decision. Read actual MRV counts, degree and LCV impacts in the event. Jump to Backtrack on this same Full CSP trace and explain why the parent snapshot is restored. Search-tree nodes come from real branch events; they are not a scripted search animation.
 
-**2:05–2:45:** Run Human Logic + Proofs. Inspect one certificate's actual clue/domain premises, the verified count and the separately labeled assumptions. State that the verifier is a different enumerator and guesses are not proofs.
+**2:05–2:45:** Run Human Logic + Proofs. Inspect one certificate's actual clue/domain premises, the 86/86 deduction/forced-assignment count and the four separately labeled assumptions. There are 59 technique applications; singleton announcements account for the extra verified items. State that the verifier is a different enumerator and does not certify every non-mutating timeline message.
 
-**2:45–3:15:** Open Play, enter a wrong digit, and use Why is this wrong? Show the ordered contradiction chain and whether minimum clue-core search completed. Explain the budget/inconclusive case rather than presenting it as a proof.
+**2:45–3:15:** Open Play for that same Expert puzzle. For a repeatable clean demonstration, reset its saved session first, select **row 3, column 2** in the UI (zero-based coordinate `2,1`) and enter **1**. Use Why is this wrong? The four-cell downward clue totals 27: with 1 fixed, the other three distinct digits total at most 9+8+7, giving only 25, so no completion exists. The tested result is a one-step contradiction and a one-clue minimum core under that fixed entry. Clear the wrong digit afterward. If a different saved state or puzzle is used, treat any budget/inconclusive response honestly rather than expecting this exact explanation.
 
-**3:15–4:05:** Open Strategy Arena, select the current puzzle and run all configurations. Compare actual time and nodes. Point out that fewer nodes need not mean faster runtime. Show the complete table and real experiment scatter.
+**3:15–4:05:** Open Strategy Arena, select the current puzzle and run all configurations. Compare actual time and nodes. Point out that fewer nodes need not mean faster runtime, and Human's check counter excludes unsuccessful catalogue work. The lower experiment panel/scatter displays frozen historical observations; label those separately from the arena run you just executed.
 
-**4:05–4:45:** Generate a 5×5 puzzle with seed 42 and Any target. Inspect the actual ambiguity repair notebook, uniqueness result and measured difficulty score; load it into Play.
+**4:05–4:45:** Generate a 5×5 puzzle with seed 42 and Any target. Inspect the actual ambiguity repair notebook, uniqueness result, method message and measured difficulty score; load it into Play. Explain that log highlighting overlays coordinates on the final canvas and is not historical generator-state replay. If recovery runs, identify it as constructive recovery followed by real uniqueness checking.
 
 **4:45–5:00:** Return to Demonstration Mode and reset. Close with the two contributions and the explicit calibration/browser-verification limits.
 
@@ -437,24 +552,50 @@ On macOS/Linux use `python3 -m venv .venv` and `.venv/bin/python` in place of th
 | Why is it a CSP? | Cells are variables, digits are domains, and each run imposes a sum equation plus AllDifferent. |
 | Does propagation solve everything? | No. Some unique library puzzles reach a fixed point and require explicit guesses; the trace records their depth and failed branches. |
 | Is the verifier independent? | It imports no engine/technique code and uses its own premise enumeration, while sharing the board's structural schema and replay data format. |
-| What exactly is proved? | Each deduction is entailed by its local premises, conditional on earlier assumptions. Trace-state transitions and final complete solutions are also validated. |
+| What exactly is proved? | Candidate reductions/forced assignments are entailed by recorded premises under explicit assumptions; state transitions and final solutions are checked. Non-mutating timeline messages are not semantically certified. |
 | Is the conflict globally shortest? | Shortest in the implemented deduction-application graph when BFS completes. Minimum clue-cardinality is a separate bounded exact search conditioned on supplied entries. |
 | Why not OR-tools in the engine? | The course project demonstrates custom CSP logic. OR-tools is reserved for an independent test oracle. |
 | Can you guarantee uniqueness? | Only completed solution counting with a limit of at least two establishes unique/multiple status. A timeout is inconclusive. |
 | How is repair different from random retry? | The two solutions identify disagreement cells, and the repair edits one of those witness digits and its two clue sums before recounting. |
 | Does changing a clue preserve the witness? | Both affected clue sums are recomputed after a digit legal in both runs is chosen, so the edited witness remains a valid fill. |
 | Are difficulty labels human-validated? | No. They are per-size empirical quantiles of solver behavior; the correlation measures search effort association, not human difficulty. |
-| Does Full CSP always win? | No. Exact tuple work can exceed the search it saves. The raw table includes cases where MRV or baseline is faster. |
+| Does Full CSP always win? | No. Exact tuple work can exceed the search it saves. The raw table includes cases where MRV or baseline is faster. Human's recorded check count also has narrower instrumentation, so it is not a total-work comparison. |
+| Can the historical generator rates be reproduced by rerunning today's command? | The raw statistics can be recomputed exactly. Today's generator includes recovery and produces a new-policy study; the pre-fix executable revision is not included in the published history. |
+| Does the repair log show the old board? | No. It records actual edits and overlays coordinates on the accepted final canvas. Only solver replay reconstructs past domain states. |
 | What works offline? | All game, solver, generation, replay and persistence operations, once local dependencies are installed and the two local services are running. |
 | What remains incomplete? | Empirical calibration for sizes 7–12, rendered browser/mobile QA and stronger research validation such as human studies and repeated timing intervals. |
 
 ## 15. Limitations, future work, references and project tree
 
+### Final acceptance audit
+
+“Implemented / automated evidence” means the code and stated tests/API checks support the feature; it does not imply rendered visual QA. “Partial” identifies an original requirement that is broader than the current implementation or evidence.
+
+| Original acceptance area | Final status | Evidence or remaining boundary |
+|---|---|---|
+| Playable game and five difficulty levels | Implemented / automated evidence | Ten unique built-ins, entries/notes/history/timer/help/completion tests; persisted local sessions |
+| CSP search, MRV, degree, LCV and propagation | Implemented / automated evidence | Seven configurations; all match CP-SAT over the 300-puzzle test corpus |
+| Proof-carrying Human Logic | Implemented with stated proof scope | Seven techniques; independent local entailment; guesses and non-certified narrative events distinguished |
+| Minimal “Why is this wrong?” | Partial relative to a global minimum objective | Bounded catalogue-shortest BFS and conditional minimum clue count; not a global joint cells/clues/entries minimum |
+| Reasoning timeline and candidate highlights | Implemented / rendering unverified | Real event payloads and board/highlight handlers; no rendered animation/console walkthrough completed |
+| Genuine solver replay | Implemented / automated evidence | Domain deltas, branch/restore snapshots, replay-state and control tests |
+| Unique generator and ambiguity-guided repair | Implemented with bounded recovery | Real counts; targeted digit/two-clue edits; sizes 5–12 tested; minimum edit count not established |
+| Solver-derived difficulty across all sizes | Partial | Empirical 200-sample calibration at sizes 5 and 6 only; sizes 7–12 provisional |
+| Strategy Arena and ablation | Implemented with measurement caveats | Seventy recorded runs plus live comparisons; single timings and unequal Human check instrumentation |
+| Repair/random and difficulty/effort experiments | Real data; policy coverage partial | Historical 800-run paired comparison and 400-puzzle correlation; not a full current-policy study at every size |
+| Demonstration Mode | Implemented / real-engine API evidence | Tested `expert-1` Full CSP trace includes propagation, decisions and backtracking; current human stream verifies |
+| Responsive premium UI and accessibility | Implemented CSS/controls; visual audit incomplete | Production build and DOM tests pass; screenshots, mobile/console and accessibility audit remain open |
+| Organized/commented code | Implemented modular source | Separate model/search/techniques/verifier/diagnosis/generator/API and React modules; no claim of a completed external style audit |
+| Presentation README, supporting docs, reproducible data | Updated and evidence-checked | This self-contained source, raw records/charts and a dated final audit; historical reanalysis distinguished from current reruns |
+| Automated tests and simple launch | Passed after restart | 345 backend, 13 frontend, 95.23% core coverage, build, live HTTP smoke; two commands to restart |
+
+The project is suitable for an accurate presentation using the supported claims above. It is **not** accurate to check every original acceptance item as unconditionally complete. Remaining research/visual validation must stay on the limitations slide unless it is actually completed later.
+
 The core is extensively sampled and independently checked, but that does not prove correctness for every possible puzzle. The 300-oracle set contains small unique 5×5 boards. Larger layouts, long runs, malformed inputs, nonunique boards and caps have focused tests, but not an exhaustive oracle corpus. Generation for 7–12 can exhaust its cap and uses provisional difficulty thresholds. A verified unique output is never substituted with an unverified one.
 
-Shortest diagnosis is catalogue-relative. Minimum clue cores condition on all player entries and do not optimize the joint entry/clue assumption set. Minimum-edit repair is not claimed. Proof checking establishes local entailment under recorded assumptions, not a universal human reasoning theory. Single-run timings lack confidence intervals; the pooled correlation may be size-confounded.
+Shortest diagnosis is catalogue-relative. Minimum clue cores condition on all player entries and do not optimize the joint entry/clue assumption set. Minimum-edit repair is not claimed. Proof checking establishes local entailment under recorded assumptions, not a universal human reasoning theory or certification of every timeline message. Human check counts omit unsuccessful catalogue work. Single-run timings lack confidence intervals; the pooled correlation may be size-confounded. Current recovery and historical repair-only policy results are distinct, and the repair notebook does not reconstruct old generator boards.
 
-Browser automation was unavailable because its Windows safety check could not determine the browser URL. Production build, API tests, DOM tests and local HTTP readiness passed, but rendered desktop/mobile, console, keyboard walkthrough and accessibility audit remain to be completed. The project therefore **does not claim every final acceptance checkbox is satisfied**. See [`docs/verification.md`](docs/verification.md) for the precise evidence and remaining work.
+Browser automation was retried after the restart and still failed during its Statsig initialization; the earlier native fallback had stopped at Windows URL safety detection. Production build, API tests, DOM tests and local HTTP readiness passed, but rendered desktop/mobile, console, keyboard walkthrough and accessibility audit remain to be completed. See [`docs/verification.md`](docs/verification.md) for the evidence and [`results/final-audit.json`](results/final-audit.json) for the dated data checks.
 
 Future work: calibrate 200+ unique puzzles at every supported size; stratify correlations by size; run repeated shuffled-order benchmark trials with intervals; recruit human solvers for difficulty validation; improve bounded conflict search; optimize tuple tables and reversible domains; add a service worker/PWA and a single distributable launcher; complete visual and accessibility audits.
 
@@ -479,7 +620,7 @@ AI PROJECT/
 │   │   ├── solver/
 │   │   │   ├── constraints.py / engine.py / techniques.py
 │   │   │   └── verifier.py / diagnose.py / replay.py
-│   │   └── generator/generate.py / difficulty.py
+│   │   └── generator/generate.py / layouts.py / difficulty.py
 │   └── tests/
 ├── frontend/
 │   ├── package.json / package-lock.json / vite.config.js
@@ -492,6 +633,6 @@ AI PROJECT/
 │   └── tests/
 ├── data/puzzles.json
 ├── scripts/experiments.py / build_library.py / oracle_corpus.py / report.py
-├── results/  (raw CSV, corpus JSON, calibration, coverage and generated PNG charts)
-└── docs/architecture.md / algorithms.md / benchmarking.md / verification.md / specification.md
+├── results/  (raw CSV, corpus JSON, calibration, coverage, final-audit.json and PNG charts)
+└── docs/architecture.md / algorithms.md / benchmarking.md / verification.md / generator-reliability.md / specification.md
 ```

@@ -36,8 +36,9 @@
       ],
       "calibrated": true
     },
-    "wall_time_ms": 25.437
+    "wall_time_ms": 27.592
   },
   "frontend_http_status": 200,
-  "browser_visual_qa": "unverified: Computer Use stopped at Windows URL safety detection"
+  "browser_visual_qa": "unverified: retry after restart failed at Statsig initialization; earlier native fallback stopped at URL safety detection",
+  "audited_at": "2026-11-13T13:10:23.635519+05:30"
 }
