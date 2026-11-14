@@ -634,5 +634,5 @@ AI PROJECT/
 ├── data/puzzles.json
 ├── scripts/experiments.py / build_library.py / oracle_corpus.py / report.py
 ├── results/  (raw CSV, corpus JSON, calibration, coverage, final-audit.json and PNG charts)
-└── docs/architecture.md / algorithms.md / benchmarking.md / verification.md / generator-reliability.md / specification.md
+└── docs/architecture.md / algorithms.md / benchmarking.md / verification.md / generator-reliability.md / specification.md / personal-concepts-guide.md
 ```
