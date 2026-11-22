@@ -1,5 +1,14 @@
 # Kakuro AI Lab
 
+## Project team
+
+| Name | Roll number |
+|---|---|
+| Shikhar Agarwal | 2410110615 |
+| Antra Agarwal | 2410110404 |
+| Harsh Sumrav | 2410110142 |
+| Suryansh Siddhu | 2410110623 |
+
 ### Small cells. Deep reasoning.
 
 Kakuro AI Lab is an offline, explainable constraint-satisfaction platform: a playable puzzle room, a live solver laboratory, a fair strategy arena and an ambiguity-guided generator. Its two project contributions are **proof-carrying human-technique deductions with bounded shortest-conflict diagnosis**, and **solution-disagreement-guided clue repair with behavior-based difficulty**. Every decision, elimination, branch and benchmark comes from a custom pure Python engine. React makes that reasoning inspectable and reversible; FastAPI connects the two without external AI services. These are contributions to this academic project, not claims of being the first such ideas in the research literature.
